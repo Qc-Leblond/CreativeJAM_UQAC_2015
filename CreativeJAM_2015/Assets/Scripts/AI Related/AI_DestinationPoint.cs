@@ -7,6 +7,6 @@ public class AI_DestinationPoint : MonoBehaviour {
     public bool isActive = true;
 
     void Awake() {
-        position = transform.position;
+        position = new Vector3(transform.position.x, 5, transform.position.z);
     }
 }
