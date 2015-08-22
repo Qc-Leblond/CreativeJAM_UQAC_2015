@@ -38,7 +38,7 @@ public class Ressource : MonoBehaviour {
     {
         if (other.tag == "Girl")
         {
-            //DO SOMETHING
+            /*GameManager.instance.mapGenerator*/
         }
     }
 }

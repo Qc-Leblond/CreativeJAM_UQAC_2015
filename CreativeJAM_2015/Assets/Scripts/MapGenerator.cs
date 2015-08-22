@@ -7,14 +7,18 @@ public class MapGenerator : MonoBehaviour {
 	public GameObject [] pieceArray;
     public GameObject Filler;
 	public Material[] colorAray;
+    public GameObject ressource;
 	public int maxSizeX;
 	public int maxSizeY;
 	public int maxRooms;
 	public float withRoom;
+    public int maxRessource;
 
 	private int[,] corArray;
     private int[,] colorRooms;
-	private List <char> directionDispo = new List<char>(); 
+    GameObject[] spawns;
+	private List <char> directionDispo = new List<char>();
+    
 	int startPosition;
 	int positionY;
 	int positionX;
@@ -107,10 +111,18 @@ public class MapGenerator : MonoBehaviour {
                 //set la color
 				directionDispo.Clear();
 			}
-
-            
-       
 		}
+
+        spawns = GameObject.FindGameObjectsWithTag("spwannerRessource");
+        List<GameObject> listSpawnner = new List<GameObject>(spawns);
+        List<GameObject> listSpawnnerTemp = listSpawnner;
+
+        for (int i = 0; i < maxRessource; i++)
+        {
+            randomIndexList = Random.Range(0, listSpawnnerTemp.Count);
+            Instantiate(ressource, listSpawnnerTemp[randomIndexList].transform.position, Quaternion.identity);
+            listSpawnnerTemp.RemoveAt(randomIndexList);
+        }
 
         for (int j = 0; j < maxSizeX; j++)
         {
@@ -121,37 +133,46 @@ public class MapGenerator : MonoBehaviour {
                 {
                     fillerPosition.x = (withRoom * j);
                     fillerPosition.z = (withRoom * k);
+                    
                     monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
 
                     setColorFiller(monFiller, j, k);
 
-                    fillerPosition.x = -20;
+                    fillerPosition.x = - withRoom;
                     fillerPosition.z = (withRoom * j);
 
-                    Instantiate(Filler, fillerPosition, Quaternion.identity);
+                    monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+
+                    setColorFiller(monFiller, j, k);
 
                     fillerPosition.x = withRoom * maxSizeY;
                     fillerPosition.z = (withRoom * j);
 
-                    Instantiate(Filler, fillerPosition, Quaternion.identity);
+                    monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+
+                    setColorFiller(monFiller, j, k);
                 }
             }
 
             fillerPosition.x = (withRoom * j);
-            fillerPosition.z = -20;
+            fillerPosition.z = - withRoom;
 
-            Instantiate(Filler, fillerPosition, Quaternion.identity);
+            monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+
+            setColorFiller(monFiller, j, (int)fillerPosition.z);
             
             fillerPosition.x = (withRoom * j);
             fillerPosition.z = withRoom * maxSizeY;
 
-            Instantiate(Filler, fillerPosition, Quaternion.identity);
+            monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+
+            setColorFiller(monFiller, j, (int)(fillerPosition.z / withRoom));
         }
 	}
 
     void setColorFiller(GameObject monFiller, int x, int y)
     {
-        MeshRenderer maDoor;
+        /*MeshRenderer maDoor;
         int maColor;
         
         if (x < maxSizeX - 1)
@@ -180,6 +201,6 @@ public class MapGenerator : MonoBehaviour {
             maDoor = monFiller.transform.FindChild("DoorN").GetComponent<MeshRenderer>();
             maColor = colorRooms[x, y];
             //add la texture
-        }
+        }*/
     }
 }
