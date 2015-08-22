@@ -14,12 +14,9 @@ public class GameManager : MonoBehaviour {
         //Varaible qui contient le scrpit du player
         private Player playerScript;
 
-        //Variable qui contient le doute de sur le joueur (doubt)
-        private float doubt;    
-
-        //Variable pour le get et set le doubt
-        public float getSetDoubt
-        {
+       //Variable qui contient le doute de sur le joueur (doubt)
+       public float doubt
+       {
             get
             {
                 return doubt;
@@ -30,7 +27,7 @@ public class GameManager : MonoBehaviour {
                 Debug.Log("Valeur du doute :" + value);
                 doubt = value;
             }
-        }
+       }
         
     //********************************************************************************************//
 
@@ -42,37 +39,14 @@ public class GameManager : MonoBehaviour {
             instance = new GameManager();
         }
 
+        //On garde en memoire le script du player pour y avoir acces 
         playerScript = playerGO.GetComponent<Player>();
 
-        initiatePlayersStates(playerScript);
-
         doubt = 0;
-        
     }
 
     void update()
     {
-        if (playerScript.returnIsGirlWalking())
-        {
-            //On doit descendre l'ego du joueur
-            playerScript.ego = playerScript.ego - 0.5f;//Valeur temporaire
-
-            //On verifie si l'ego est = 0
-            if (playerScript.ego <= 0)
-            {
-                Debug.Log("TU ES UNE FILLE !!!");
-            }
-        }
-    }
-
-    //Fonction pour initialiser les info sur le joueur ego, isGirlWalking etc...
-    void initiatePlayersStates(Player thePlayerScript)
-    {
-        thePlayerScript.nbrJunk = 0; //Valeur temporaire
-        thePlayerScript.isGirlWalking = false;
-        thePlayerScript.ego = 100f; //Valeur temporaire
-    }
-
-
-	
+        
+    }	
 }
