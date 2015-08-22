@@ -45,14 +45,13 @@ public class GameManager : MonoBehaviour {
     {
         if (instance == null)
         {
-            instance = new GameManager();
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else {
             Destroy(gameObject);
         }
 
-        playerScript = playerGO.GetComponent<Player>();
         playerGO = GameObject.FindGameObjectWithTag("Player");
         playerScript = playerGO.GetComponent<Player>();
         switch (currentScene) {
@@ -60,6 +59,7 @@ public class GameManager : MonoBehaviour {
                 break;
             case Scene.main:
                 OnMainLoad();
+                StartCinematic();
                 break;
         }
     }
@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour {
             case Scene.main:
                 Application.LoadLevel("Main");
                 OnMainLoad();
+                StartCinematic();
                 break;
         }
     }
@@ -135,38 +136,48 @@ public class GameManager : MonoBehaviour {
 
     [Header("Intro Cinematic")]
     public Camera cinematicCamera;
+    public GameObject cinematicCharacter;
     public float DelayBetween;
     public float finalHeight;
     public float risingSpeed;
-    public float cinematicCameraSpeed;
-    public float cinematicCameraTurnSpeed;
+    public float cinematicCameraAnimTime;
+    private float cameraRotation;
 
     private void StartCinematic() {
-
-        //StartCoroutine(CinematicAnim());
+        cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        cinematicCamera.transform.localPosition = new Vector3(0, -0.2f, -1.6f);
+        cinematicCharacter.transform.position = new Vector3(0, -1, 0.35f);
+        cameraRotation = 0;
+        StartCoroutine(CinematicAnim());
     }
 
-    /*IEnumerator CinematicAnim() {
-        while (playerGO.transform.position.y < finalHeight) {
-            transform.localPosition += new Vector3(0, risingSpeed * Time.deltaTime, 0);
+    IEnumerator CinematicAnim() {
+        Camera main = Camera.main;
+        Camera.main.enabled = false;
+        cinematicCamera.enabled = true;
+        while (cinematicCharacter.transform.position.y < finalHeight) {
+            cinematicCharacter.transform.position += new Vector3(0, risingSpeed * Time.deltaTime, 0);
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(DelayBetween);
         while (!TurnCamera() & !MoveCamera()) {
             yield return new WaitForEndOfFrame();
         }
+        cinematicCharacter.transform.position = new Vector3(-1000, -1000, -1000);
         yield return new WaitForSeconds(0.5f);
+        main.enabled = true;
+        cinematicCamera.enabled = false;
     }
 
     bool TurnCamera() {
-        cinematicCamera.transform.rotation = Quaternion.Euler(new Vector3(cinematicCamera.transform.rotation.x,
-                                                                          cinematicCamera.transform.rotation.y + cinematicCameraTurnSpeed,
-                                                                          cinematicCamera.transform.rotation.z));
+        cinematicCamera.transform.Rotate(new Vector3(0, 180 / cinematicCameraAnimTime * Time.deltaTime, 0));
+        return cameraRotation >= 180;
     }
 
     bool MoveCamera() {
-
-    }*/
+        cinematicCamera.transform.localPosition += new Vector3(0, 0, 1.4f / cinematicCameraAnimTime * Time.deltaTime);
+        return cinematicCamera.transform.localPosition.z >= -0.2f;
+    }
     
     #endregion
 }
