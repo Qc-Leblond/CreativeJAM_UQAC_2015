@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Controller : MonoBehaviour 
 {
-    public bool isAxisInUse;         //Capte si le Dpad est utilisé
+    private bool isAxisInUse;         //Capte si le Dpad est utilisé
     public float MaxCam = 0.2f,      //Angle maximal de la caméra
                  MinCam = -0.2f,     //Angle minimal de la caméra
                  MoveSpeed = 5f,     //Vitesse de translation
@@ -80,13 +80,11 @@ public class Controller : MonoBehaviour
         if (Input.GetButtonDown("CraftItem"))
         {
             //Do something fun :D
-            Debug.Log("craft");
         }
 
         //Input pour utiliser un item
         if (Input.GetButtonDown("UseItem"))
         {
-            Debug.Log("use");
             //Do something fun :D
         }
 	}
