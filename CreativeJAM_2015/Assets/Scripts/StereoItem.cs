@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class StereoItem : MonoBehaviour {
 
     public GUIText textBait;
     public float duration;
+
+    private List<GameObject> listFilles = new List<GameObject>(); 
     // Use this for initialization
     void Awake()
     {
-        StartCoroutine("play");
+        
     }
 
     // Update is called once per frame
@@ -16,18 +19,17 @@ public class StereoItem : MonoBehaviour {
     {
         duration = duration - Time.deltaTime;
         textBait.text = "" + Mathf.Floor(duration);
-    }
-
-    IEnumerator play()
-    {
-        yield return new WaitForSeconds(duration);
-        Destroy(gameObject);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Girl")
+        if(duration <= 0)
         {
+            Destroy(transform.root.gameObject);
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Girl" && !listFilles.Contains(other.gameObject))
+        {
+            listFilles.Add(other.gameObject);
             RaycastHit hit;
 
             if (Physics.Raycast(transform.position, other.transform.position - transform.position, out hit))
