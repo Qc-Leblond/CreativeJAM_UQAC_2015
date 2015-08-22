@@ -15,7 +15,11 @@ public class Trap : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        other.transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.crying);
-        Destroy(gameObject);
+        if (other.tag == "Girl")
+        {
+            other.transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.crying);
+            Destroy(gameObject);
+        }
+        
     }
 }
