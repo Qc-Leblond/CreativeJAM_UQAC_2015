@@ -16,12 +16,9 @@ public class GameManager : MonoBehaviour {
         [HideInInspector]
         public Player playerScript;
 
-        //Variable qui contient le doute de sur le joueur (doubt)
-        private float doubt;    
-
-        //Variable pour le get et set le doubt
-        public float getSetDoubt
-        {
+       //Variable qui contient le doute de sur le joueur (doubt)
+       public float doubt
+       {
             get
             {
                 return doubt;
@@ -32,6 +29,7 @@ public class GameManager : MonoBehaviour {
                 Debug.Log("Valeur du doute :" + value);
                 doubt = value;
             }
+
         }
 
         [Header("Level Related")]
@@ -47,20 +45,24 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            playerGO = GameObject.FindGameObjectWithTag("Player");
+            playerScript = playerGO.GetComponent<Player>();
+            switch (currentScene) {
+                case Scene.menu:
+                    break;
+
+                case Scene.cinematicIntro:
+                    StartCinematic();
+                    break;
+
+                case Scene.main:
+                    OnMainLoad();
+                    mapGenerator.SpawnGen();
+                    break;
+            }
         }
         else {
             Destroy(gameObject);
-        }
-
-        playerGO = GameObject.FindGameObjectWithTag("Player");
-        playerScript = playerGO.GetComponent<Player>();
-        switch (currentScene) {
-            case Scene.menu:
-                break;
-            case Scene.main:
-                OnMainLoad();
-                StartCinematic();
-                break;
         }
     }
 
@@ -107,6 +109,7 @@ public class GameManager : MonoBehaviour {
 
     public enum Scene {
         menu,
+        cinematicIntro,
         main,
     }
 
@@ -116,10 +119,15 @@ public class GameManager : MonoBehaviour {
                 Application.LoadLevel("Menu");
                 break;
 
+            case Scene.cinematicIntro:
+                Application.LoadLevel("Intro");
+                StartCinematic();
+                break;
+
             case Scene.main:
                 Application.LoadLevel("Main");
                 OnMainLoad();
-                StartCinematic();
+                mapGenerator.SpawnGen();
                 break;
         }
     }
@@ -136,7 +144,6 @@ public class GameManager : MonoBehaviour {
 
     [Header("Intro Cinematic")]
     public Camera cinematicCamera;
-    public GameObject cinematicCharacter;
     public float DelayBetween;
     public float finalHeight;
     public float risingSpeed;
@@ -146,7 +153,7 @@ public class GameManager : MonoBehaviour {
     private void StartCinematic() {
         cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         cinematicCamera.transform.localPosition = new Vector3(0, -0.2f, -1.6f);
-        cinematicCharacter.transform.position = new Vector3(0, -1, 0.35f);
+        playerGO.transform.position = new Vector3(0, 0.2f, 17f);
         cameraRotation = 0;
         StartCoroutine(CinematicAnim());
     }
@@ -155,29 +162,37 @@ public class GameManager : MonoBehaviour {
         Camera main = Camera.main;
         Camera.main.enabled = false;
         cinematicCamera.enabled = true;
-        while (cinematicCharacter.transform.position.y < finalHeight) {
-            cinematicCharacter.transform.position += new Vector3(0, risingSpeed * Time.deltaTime, 0);
+        while (!MoveCamera(0.25f, -0.15f)) {
+            yield return new WaitForEndOfFrame();
+        }
+        while (playerGO.transform.position.y < finalHeight) {
+            playerGO.transform.position += new Vector3(0, risingSpeed * Time.deltaTime, 0);
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(DelayBetween);
-        while (!TurnCamera() & !MoveCamera()) {
+        /*while (!TurnCamera() & !MoveCamera()) {
+            yield return new WaitForEndOfFrame();
+        }*/
+        yield return new WaitForSeconds(0.5f);
+        cinematicCamera.transform.localPosition = playerGO.transform.position + new Vector3(0, -3f, -3f);
+        cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        while (MoveCamera(-2f, 7f)) {
             yield return new WaitForEndOfFrame();
         }
-        cinematicCharacter.transform.position = new Vector3(-1000, -1000, -1000);
         yield return new WaitForSeconds(0.5f);
-        main.enabled = true;
-        cinematicCamera.enabled = false;
+        SwitchScene(Scene.main);
     }
 
-    bool TurnCamera() {
+    /*bool TurnCamera() {
         cinematicCamera.transform.Rotate(new Vector3(0, 180 / cinematicCameraAnimTime * Time.deltaTime, 0));
         return cameraRotation >= 180;
-    }
+    }*/
 
-    bool MoveCamera() {
-        cinematicCamera.transform.localPosition += new Vector3(0, 0, 1.4f / cinematicCameraAnimTime * Time.deltaTime);
-        return cinematicCamera.transform.localPosition.z >= -0.2f;
+    bool MoveCamera(float speed, float destination) {
+        cinematicCamera.transform.localPosition += new Vector3(0, 0, speed / cinematicCameraAnimTime * Time.deltaTime);
+        return cinematicCamera.transform.localPosition.z >= destination;
     }
     
     #endregion
+
 }
