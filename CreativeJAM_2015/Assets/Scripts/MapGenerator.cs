@@ -6,6 +6,7 @@ public class MapGenerator : MonoBehaviour {
 
 	public GameObject [] pieceArray;
     public GameObject Filler;
+    public GameObject Garage;
 	public Material[] colorAray;
     public GameObject ressource;
 	public int maxSizeX;
@@ -28,18 +29,19 @@ public class MapGenerator : MonoBehaviour {
 	char caseSwitch;
 	Vector3 instancePosition;
 	Vector3 fillerPosition;
+    Vector3 garagePosition;
 
 	// Use this for initialization
-	void Awake () {
+	public void SpawnGen () {
 		corArray = new int[maxSizeX,maxSizeY];
         colorRooms = new int[maxSizeX, maxSizeY];
 		startPosition = Random.Range (0, maxSizeX);
 		randomRoom = Random.Range (0, pieceArray.Length);
 		instancePosition = new Vector3 (withRoom * startPosition, 0f, 0f);
-		fillerPosition = new Vector3 (instancePosition.x, instancePosition.y, instancePosition.z - withRoom);
+        garagePosition = new Vector3(instancePosition.x, instancePosition.y, instancePosition.z - withRoom);
 
 		Instantiate (pieceArray [randomRoom], instancePosition, Quaternion.identity);
-		Instantiate (Filler, fillerPosition, Quaternion.identity);
+        Instantiate(Garage, garagePosition, Quaternion.identity);
 
 		corArray [startPosition, 0] = 1;
 
@@ -153,19 +155,22 @@ public class MapGenerator : MonoBehaviour {
                 }
             }
 
+            
             fillerPosition.x = (withRoom * j);
             fillerPosition.z = - withRoom;
 
-            monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+            if (fillerPosition.x != garagePosition.x) {
+                monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
 
-            setColorFiller(monFiller, j, (int)fillerPosition.z);
-            
-            fillerPosition.x = (withRoom * j);
-            fillerPosition.z = withRoom * maxSizeY;
+                setColorFiller(monFiller, j, (int)fillerPosition.z);
 
-            monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+                fillerPosition.x = (withRoom * j);
+                fillerPosition.z = withRoom * maxSizeY;
 
-            setColorFiller(monFiller, j, (int)(fillerPosition.z / withRoom));
+                monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+
+                setColorFiller(monFiller, j, (int)(fillerPosition.z / withRoom));
+            }
         }
 	}
 
