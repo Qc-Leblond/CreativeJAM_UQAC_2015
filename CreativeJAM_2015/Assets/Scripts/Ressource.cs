@@ -38,7 +38,12 @@ public class Ressource : MonoBehaviour {
     {
         if (other.tag == "Girl")
         {
-            //DO SOMETHING
+            if (GameManager.instance.mapGenerator.listSpawnnerTemp.Contains(gameObject))
+            {
+                GameManager.instance.mapGenerator.listSpawnnerTemp.Remove(gameObject);
+            }
+            GameManager.instance.mapGenerator.spawnUneRessource();
+            GameManager.instance.mapGenerator.listSpawnnerTemp.Add(gameObject);
         }
     }
 }
