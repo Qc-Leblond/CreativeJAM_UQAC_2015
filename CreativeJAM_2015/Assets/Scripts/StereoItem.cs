@@ -34,7 +34,7 @@ public class StereoItem : MonoBehaviour {
             {
                 if (hit.transform.tag == "Girl")
                 {
-                   // hit.transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.);
+                   hit.transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.baited, duration, transform.position);
                 }
             }
         }

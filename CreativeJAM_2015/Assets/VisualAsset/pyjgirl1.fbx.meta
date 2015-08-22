@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: f0586fdf4a6ede844bb9d3c346bf7db8
-timeCreated: 1440251643
-=======
-guid: dcae9b67e88970d4d908ded2d1b5c0a5
-timeCreated: 1440253748
->>>>>>> 44f8ee6bc35a02486bde00f14999cd6309e99328
-licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -15,6 +8,7 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: polySurface21
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -24,13 +18,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
-<<<<<<< HEAD
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-=======
->>>>>>> 44f8ee6bc35a02486bde00f14999cd6309e99328
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -41,7 +32,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -75,7 +66,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   additionalBone: 0
   userData: 
   assetBundleName: 
