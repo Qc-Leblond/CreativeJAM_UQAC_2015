@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:CreativeJAM_2015/Assets/Scripts/AI Related/AI_DestinationPointsList.cs.meta
 guid: fe505e44a5e77c4418988a360167aa37
 timeCreated: 1440214763
+=======
+guid: 02f5f255f402b2141a6fb96084db244d
+timeCreated: 1440212273
+>>>>>>> Creer le map generator et une piece:CreativeJAM_2015/Assets/Visual Assets/NewBehaviourScript.js.meta
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
