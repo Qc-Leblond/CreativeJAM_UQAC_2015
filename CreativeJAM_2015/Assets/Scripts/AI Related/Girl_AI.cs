@@ -12,7 +12,8 @@ public class Girl_AI : MonoBehaviour {
         idle,
         crying,
         occupied,
-        doubtful
+        doubtful,
+        baited
     }
 
     AIState previousState;
@@ -20,6 +21,7 @@ public class Girl_AI : MonoBehaviour {
 
     public bool isCrying = false;
     public bool isStuck = false;
+    public bool isBaited = false;
 
     public static AI_DestinationPointsList possibleDestinations;
     [HideInInspector]
@@ -47,6 +49,7 @@ public class Girl_AI : MonoBehaviour {
         stateDictionary.Add(State.crying, new AIState_Crying(this));
         stateDictionary.Add(State.occupied, new AIState_Occupied(this));
         stateDictionary.Add(State.doubtful, new AIState_Doubtful(this));
+        stateDictionary.Add(State.baited, new AIState_Baited(this));
         SwitchState(State.idle);
         fieldOfViewVisual.material.color = noDoubt;
     }
@@ -61,8 +64,8 @@ public class Girl_AI : MonoBehaviour {
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public void SwitchState(State state) {
-        if (!isCrying) {
+    public void SwitchState(State newState) {
+        if (!isCrying && !isBaited) {
             if (currentState != null) {
                 currentState.Finish();
                 previousState = currentState;
@@ -70,8 +73,28 @@ public class Girl_AI : MonoBehaviour {
             else {
                 previousState = stateDictionary[State.idle];
             }
-            currentState = stateDictionary[state];
+            currentState = stateDictionary[newState];
             currentState.Execute();
+            
+        }
+    }
+
+    public void SwitchState(State newState, float time, Vector3 destination) {
+        if (!isCrying && !isBaited) {
+            if (currentState != null) {
+                currentState.Finish();
+                previousState = currentState;
+            }
+            else {
+                previousState = stateDictionary[State.idle];
+            }
+            currentState = stateDictionary[newState];
+            if (newState == State.baited) {
+                ((AIState_Baited)currentState).baitedTime = time;
+                ((AIState_Baited)currentState).destination = destination;
+            }
+            currentState.Execute();
+            
         }
     }
 
@@ -184,6 +207,21 @@ public class AIState_Doubtful : AIState {
     public override void Finish() {
         girlAI.fieldOfViewVisual.material.color = girlAI.noDoubt;
         girlAI.girlPathingAI.Resume();
+    }
+}
+
+public class AIState_Baited : AIState {
+    public AIState_Baited(Girl_AI ai) : base(ai) {  }
+    public float baitedTime;
+    public Vector3 destination;
+    public override void Execute() {
+        girlAI.girlPathingAI.destination = destination;
+    }
+    public override void Running() {
+        baitedTime -= Time.deltaTime;
+        if (baitedTime < 0) {
+            girlAI.SwitchState(Girl_AI.State.idle);
+        }
     }
 }
 

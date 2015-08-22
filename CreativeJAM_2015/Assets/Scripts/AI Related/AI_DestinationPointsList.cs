@@ -20,11 +20,21 @@ public class AI_DestinationPointsList {
         AI_DestinationPoint destination = destinations[Random.Range(0, destinations.Count)];
         //Change Lists
         if (occupiedDestinationPoint.Contains(currentPoint)) {
-            occupiedDestinationPoint.Remove(currentPoint);
-            freeDestinationPoint.Add(currentPoint);
+            RemovePointToOccupied(currentPoint);
         }
+        AddPointToOccupied(destination);
+        return destination;
+    }
+
+    void AddPointToOccupied(AI_DestinationPoint destination) {
         occupiedDestinationPoint.Add(destination);
         freeDestinationPoint.Remove(destination);
-        return destination;
+        destination.isOccupied = true;
+    }
+
+    void RemovePointToOccupied (AI_DestinationPoint currentPoint) {
+        occupiedDestinationPoint.Remove(currentPoint);
+        freeDestinationPoint.Add(currentPoint);
+        currentPoint.isOccupied = false;
     }
 }
