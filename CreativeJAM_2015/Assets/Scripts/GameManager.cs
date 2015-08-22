@@ -16,12 +16,9 @@ public class GameManager : MonoBehaviour {
         [HideInInspector]
         public Player playerScript;
 
-        //Variable qui contient le doute de sur le joueur (doubt)
-        private float doubt;    
-
-        //Variable pour le get et set le doubt
-        public float getSetDoubt
-        {
+       //Variable qui contient le doute de sur le joueur (doubt)
+       public float doubt
+       {
             get
             {
                 return doubt;
@@ -32,6 +29,7 @@ public class GameManager : MonoBehaviour {
                 Debug.Log("Valeur du doute :" + value);
                 doubt = value;
             }
+
         }
 
         [Header("Level Related")]
@@ -196,4 +194,5 @@ public class GameManager : MonoBehaviour {
     }
     
     #endregion
+
 }

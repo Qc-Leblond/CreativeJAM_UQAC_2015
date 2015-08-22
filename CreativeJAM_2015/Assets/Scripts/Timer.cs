@@ -5,7 +5,7 @@ public class Timer : MonoBehaviour
 {
     private bool TimerActive = false;
     private float TimeLeft,
-                  TimeStart = 30;
+                  TimeStart = 300;
 
 	void Update () 
     {
@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
         }
 	}
 
-    void TimerStart()
+    void TimerStart() //Fonction à appeller pour démarrer le timer.
     {
         TimeLeft = TimeStart;
         TimerActive = true;
