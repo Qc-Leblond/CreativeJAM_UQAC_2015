@@ -16,12 +16,11 @@ public class FieldOfView : MonoBehaviour {
     }
 
     void OnTriggerStay(Collider other) {
-        Debug.Log("Test");
         if (other.tag == "Player") {
-            Debug.Log("Test");
             RaycastHit hit;
-            Physics.Raycast(girl.position, player.position - girl.position, out hit);
-            if (hit.rigidbody.transform.root.tag == "Player") {
+            Vector3 girlPos = girlAI.GetGirlPos();
+            Physics.Raycast(girlPos, player.position -girlPos, out hit);
+            if (hit.transform.root.tag == "Player") {
                 girlAI.SwitchState(Girl_AI.State.doubtful);
                 doubtful = true;
             }
@@ -33,7 +32,6 @@ public class FieldOfView : MonoBehaviour {
     }
 
     void OnTriggerExit(Collider other) {
-        Debug.Log("Test");
         if (other.tag == "Player" && doubtful) {
             girlAI.GoBackToPreviousState();
             doubtful = false;

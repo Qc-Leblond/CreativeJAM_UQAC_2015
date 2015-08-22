@@ -29,6 +29,13 @@ public class Girl_AI : MonoBehaviour {
     public Color noDoubt;
     public Color isDoubting;
 
+    public float girlPosY;
+    public float lookatRotationSpeed;
+
+    public Vector3 GetGirlPos() {
+        return new Vector3(transform.position.x, girlPosY, transform.position.z);
+    }
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     void Awake() {
@@ -49,7 +56,7 @@ public class Girl_AI : MonoBehaviour {
             currentState.Running();
         }
 
-        if (Input.GetKeyDown(KeyCode.T)) SwitchState(State.doubtful);
+        if (Input.GetKeyDown(KeyCode.T)) SwitchState(State.moving);
     }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -160,12 +167,19 @@ public class AIState_Occupied : AIState {
 /// </summary>
 public class AIState_Doubtful : AIState {
     public AIState_Doubtful(Girl_AI ai) : base(ai) {  }
+    Transform playerPos;
     public override void Execute() {
         girlAI.fieldOfViewVisual.material.color = girlAI.isDoubting;
         girlAI.girlPathingAI.Stop();
+        if (playerPos == null) {
+            playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
     public override void Running() {
-        //Add to doubt
+        Debug.DrawLine(new Vector3(playerPos.position.x, girlAI.girlPosY, playerPos.position.z), girlAI.GetGirlPos(), Color.red, 1f);
+        girlAI.transform.rotation = Quaternion.Slerp(girlAI.transform.rotation,
+                                                     Quaternion.LookRotation(new Vector3(playerPos.position.x, girlAI.girlPosY, playerPos.position.z) - girlAI.GetGirlPos()),
+                                                     Time.deltaTime * girlAI.lookatRotationSpeed);
     }
     public override void Finish() {
         girlAI.fieldOfViewVisual.material.color = girlAI.noDoubt;
