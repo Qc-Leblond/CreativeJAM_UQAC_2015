@@ -120,9 +120,7 @@ public class MapGenerator : MonoBehaviour {
 
         for (int i = 0; i < maxRessource; i++)
         {
-            randomIndexList = Random.Range(0, listSpawnnerTemp.Count);
-            Instantiate(ressource, listSpawnnerTemp[randomIndexList].transform.position, Quaternion.identity);
-            listSpawnnerTemp.RemoveAt(randomIndexList);
+            spawnUneRessource();
         }
 
         for (int j = 0; j < maxSizeX; j++)
@@ -203,5 +201,12 @@ public class MapGenerator : MonoBehaviour {
             maColor = colorRooms[x, y];
             //add la texture
         }*/
+    }
+
+    public void spawnUneRessource()
+    {
+        randomIndexList = Random.Range(0, listSpawnnerTemp.Count);
+        Instantiate(ressource, listSpawnnerTemp[randomIndexList].transform.position, Quaternion.identity);
+        listSpawnnerTemp.RemoveAt(randomIndexList);
     }
 }
