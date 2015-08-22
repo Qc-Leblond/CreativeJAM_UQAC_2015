@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
         if (transform.position.y == 0)
         {
             if (GUI.Button(new Rect(Screen.width / 2, 50, 200, 50), "Jouer", StyleName))
-                Application.LoadLevel("SceneCostaud");
+                //Application.LoadLevel("");
             if (GUI.Button(new Rect(Screen.width / 2, 100, 350, 50), "Contrôles", StyleName))
                 transform.position = new Vector3(0, 8, -11);
             if (GUI.Button(new Rect(Screen.width / 2, 150, 350, 50), "Instructions", StyleName))
