@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour
     {
         GUIStyle StyleName = new GUIStyle();
         StyleName.font = FontName;
-        StyleName.fontSize = (20);
+        StyleName.fontSize = 20;
         StyleName.normal.textColor = Color.white;
 
         if (transform.position.y == 0)
