@@ -27,6 +27,7 @@ public class Girl_AI : MonoBehaviour {
     [HideInInspector]
     public AI_DestinationPoint currentPos;
     [Header("Field of view")]
+    public GameObject fieldOfView;
     public MeshRenderer fieldOfViewVisual;
     public Color noDoubt;
     public Color isDoubting;
@@ -59,7 +60,7 @@ public class Girl_AI : MonoBehaviour {
             currentState.Running();
         }
 
-        if (Input.GetKeyDown(KeyCode.T)) SwitchState(State.moving);
+        if (Input.GetKeyDown(KeyCode.T)) SwitchState(State.baited, 5f, Vector3.zero);
     }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -215,6 +216,7 @@ public class AIState_Baited : AIState {
     public float baitedTime;
     public Vector3 destination;
     public override void Execute() {
+        girlAI.fieldOfView.SetActive(false);
         girlAI.girlPathingAI.destination = destination;
     }
     public override void Running() {
@@ -222,6 +224,10 @@ public class AIState_Baited : AIState {
         if (baitedTime < 0) {
             girlAI.SwitchState(Girl_AI.State.idle);
         }
+    }
+    public override void Finish() {
+        girlAI.fieldOfView.SetActive(true);
+        girlAI.isBaited = false;
     }
 }
 

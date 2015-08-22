@@ -35,11 +35,12 @@ public class BombItem : MonoBehaviour {
             {
                 if (hit.transform.tag == "Girl")
                 {
-                    hitColliders[i].transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.crying);
-                    i++;
+                    hit.transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.crying);
                 }
             }
+            i++;
         }
+        Destroy(gameObject.transform.root.gameObject);
     }
 
     /*void OnTriggerEnter(Collider other)
