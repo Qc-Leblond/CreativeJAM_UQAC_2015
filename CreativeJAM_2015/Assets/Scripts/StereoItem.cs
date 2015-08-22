@@ -27,18 +27,9 @@ public class StereoItem : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Girl" && !listFilles.Contains(other.gameObject))
-        {
+        if (other.tag == "Girl" && !listFilles.Contains(other.gameObject)) {
             listFilles.Add(other.gameObject);
-            RaycastHit hit;
-
-            if (Physics.Raycast(transform.position, other.transform.position - transform.position, out hit))
-            {
-                if (hit.transform.tag == "Girl")
-                {
-                   hit.transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.baited, duration, transform.position);
-                }
-            }
+            other.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.baited, duration, transform.position);
         }
     }
 }

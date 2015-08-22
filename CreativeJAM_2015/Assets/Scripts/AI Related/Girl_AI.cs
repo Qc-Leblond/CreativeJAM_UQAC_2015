@@ -60,7 +60,7 @@ public class Girl_AI : MonoBehaviour {
             currentState.Running();
         }
 
-        if (Input.GetKeyDown(KeyCode.T)) SwitchState(State.baited, 5f, Vector3.zero);
+        if (Input.GetKeyDown(KeyCode.T)) SwitchState(State.moving);
     }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -211,13 +211,18 @@ public class AIState_Doubtful : AIState {
     }
 }
 
+/// <summary>
+/// When the girl is baited by an object
+/// </summary>
 public class AIState_Baited : AIState {
     public AIState_Baited(Girl_AI ai) : base(ai) {  }
     public float baitedTime;
     public Vector3 destination;
     public override void Execute() {
         girlAI.fieldOfView.SetActive(false);
-        girlAI.girlPathingAI.destination = destination;
+        float radius = Random.Range(4f, 11f);
+        float angle = Random.Range(0f, 360f);
+        girlAI.girlPathingAI.destination = new Vector3(destination.x + radius * Mathf.Cos(angle), destination.y, destination.z + radius * Mathf.Sin(angle));
     }
     public override void Running() {
         baitedTime -= Time.deltaTime;

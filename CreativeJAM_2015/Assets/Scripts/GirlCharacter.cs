@@ -5,7 +5,7 @@ public class GirlCharacter : MonoBehaviour {
 
     Girl_AI AI;
 
-    void Awake() {
+    void Start() {
         AI = GetComponent<Girl_AI>();
         Spawn();
     }
