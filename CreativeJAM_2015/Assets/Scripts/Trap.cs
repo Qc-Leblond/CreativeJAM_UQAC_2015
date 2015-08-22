@@ -12,4 +12,14 @@ public class Trap : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Girl")
+        {
+            other.transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.crying);
+            Destroy(gameObject);
+        }
+        
+    }
 }
