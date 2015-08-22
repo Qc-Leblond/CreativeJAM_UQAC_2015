@@ -5,13 +5,15 @@ using System.Collections.Generic;
 public class MapGenerator : MonoBehaviour {
 
 	public GameObject [] pieceArray;
-	public GameObject Filler;
+    public GameObject Filler;
+	public Material[] colorAray;
 	public int maxSizeX;
 	public int maxSizeY;
 	public int maxRooms;
 	public float withRoom;
 
 	private int[,] corArray;
+    private int[,] colorRooms;
 	private List <char> directionDispo = new List<char>(); 
 	int startPosition;
 	int positionY;
@@ -25,6 +27,7 @@ public class MapGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		corArray = new int[maxSizeX,maxSizeY];
+        colorRooms = new int[maxSizeX, maxSizeY];
 		startPosition = Random.Range (0, maxSizeX);
 		randomRoom = Random.Range (0, pieceArray.Length);
 		instancePosition = new Vector3 (withRoom * startPosition, 0f, 0f);
@@ -97,8 +100,11 @@ public class MapGenerator : MonoBehaviour {
 					break;
 				}
 
-				Instantiate (pieceArray [randomRoom], instancePosition, Quaternion.identity);
+				GameObject maPiece = Instantiate (pieceArray [randomRoom], instancePosition, Quaternion.identity) as GameObject;
+                int colorRandom = Random.Range(0, pieceArray.Length);
 				corArray [(int)(instancePosition.x / withRoom), (int)(instancePosition.z / withRoom)] = 1;
+                colorRooms[(int)(instancePosition.x / withRoom), (int)(instancePosition.z / withRoom)] = colorRandom;
+                //set la color
 				directionDispo.Clear();
 			}
 
@@ -108,13 +114,16 @@ public class MapGenerator : MonoBehaviour {
 
         for (int j = 0; j < maxSizeX; j++)
         {
+            GameObject monFiller;
             for (int k = 0; k < maxSizeY; k++)
             {
                 if (corArray[j, k] < 1)
                 {
                     fillerPosition.x = (withRoom * j);
                     fillerPosition.z = (withRoom * k);
-                    Instantiate(Filler, fillerPosition, Quaternion.identity);
+                    monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+
+                    setColorFiller(monFiller, j, k);
 
                     fillerPosition.x = -20;
                     fillerPosition.z = (withRoom * j);
@@ -139,4 +148,38 @@ public class MapGenerator : MonoBehaviour {
             Instantiate(Filler, fillerPosition, Quaternion.identity);
         }
 	}
+
+    void setColorFiller(GameObject monFiller, int x, int y)
+    {
+        MeshRenderer maDoor;
+        int maColor;
+        
+        if (x < maxSizeX - 1)
+        {
+            maDoor = monFiller.transform.FindChild("DoorE").GetComponent<MeshRenderer>();
+            maColor = colorRooms[x, y];
+            //add la texture
+        }
+
+        if (x > 0)
+        {
+            maDoor = monFiller.transform.FindChild("DoorO").GetComponent<MeshRenderer>();
+            maColor = colorRooms[x, y];
+            //add la texture
+        }
+
+        if (y > 0)
+        {
+            maDoor = monFiller.transform.FindChild("DoorS").GetComponent<MeshRenderer>();
+            maColor = colorRooms[x, y];
+            //add la texture
+        }
+
+        if (y < maxSizeY - 1)
+        {
+            maDoor = monFiller.transform.FindChild("DoorN").GetComponent<MeshRenderer>();
+            maColor = colorRooms[x, y];
+            //add la texture
+        }
+    }
 }

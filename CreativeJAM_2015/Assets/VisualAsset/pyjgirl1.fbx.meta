@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 24bd06f19494c584a9f066b6dabea878
 timeCreated: 1440250552
 licenseType: Free
+=======
+guid: f0586fdf4a6ede844bb9d3c346bf7db8
+>>>>>>> badc99993936c87f177f2736bdb77559795a3cbc
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -10,6 +14,10 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: polySurface21
+<<<<<<< HEAD
+=======
+    9500000: //RootNode
+>>>>>>> badc99993936c87f177f2736bdb77559795a3cbc
   materials:
     importMaterials: 1
     materialName: 0
@@ -33,7 +41,11 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
+<<<<<<< HEAD
     globalScale: 1
+=======
+    globalScale: 0
+>>>>>>> badc99993936c87f177f2736bdb77559795a3cbc
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -67,7 +79,11 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+<<<<<<< HEAD
   animationType: 0
+=======
+  animationType: 2
+>>>>>>> badc99993936c87f177f2736bdb77559795a3cbc
   additionalBone: 0
   userData: 
   assetBundleName: 
