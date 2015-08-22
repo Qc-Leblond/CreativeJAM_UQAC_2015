@@ -3,16 +3,18 @@ using System.Collections;
 
 public class Controller : MonoBehaviour 
 {
-    private bool isAxisInUse;         //Capte si le Dpad est utilisé
-    public float MaxCam = 0.2f,      //Angle maximal de la caméra
-                 MinCam = -0.2f,     //Angle minimal de la caméra
+    private bool isAxisInUse;        //Capte si le Dpad est utilisé
+    public float MaxCam = 20f,       //Angle maximal de la caméra
+                 MinCam = -20f,      //Angle minimal de la caméra
                  MoveSpeed = 5f,     //Vitesse de translation
-                 TurnSpeed = 100f;   //Vitesse de rotation
+                 TurnSpeed = 5f;     //Vitesse de rotation
+    private float RotationX,         //Rotation du joueur sur l'axe X
+                  RotationY = 0f;    //Rotation de la caméra sur l'axe Y
     private int NbrObjet = 6,        //Nombre d'objets (VALEUR TEMPORAIRE)
                 objectSelected = 0;  //Objet sélectioné 
     public GameObject Camera;        //Caméra attachée au joueur
     private Player player;           //Script vers Player
-
+    
     void Awake()
     {
         Cursor.visible = false; 
@@ -20,24 +22,17 @@ public class Controller : MonoBehaviour
         isAxisInUse = false;
     }
 
-    void FixedUpdate()
+    void Update ()
     {
-        float vCam = Input.GetAxis("VerticalCamera");
-        if (Camera.transform.rotation.x < MaxCam && vCam > 0 || Camera.transform.rotation.x > MinCam && vCam < 0)
-            Camera.transform.Rotate(Vector3.right * TurnSpeed * vCam * Time.deltaTime);   ///caméra haut-bas
-    }
-	void Update() 
-    {
-        //Déplacements du personnage
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        float hCam = Input.GetAxis("HorizontalCamera");
-        //float vCam = Input.GetAxis("VerticalCamera");
+        //Déplacement du personnage et de la caméra
+        RotationX = transform.localEulerAngles.y + Input.GetAxis("HorizontalCamera") * MoveSpeed;
+        RotationY += Input.GetAxis("VerticalCamera") * TurnSpeed;
+        RotationY = Mathf.Clamp (RotationY, MinCam, MaxCam);
+        Camera.transform.localEulerAngles = new Vector3(-RotationY, 0, 0);
+        transform.localEulerAngles = new Vector3(0, RotationX, 0);
 
-        transform.Translate(-Vector3.forward * MoveSpeed * v * Time.deltaTime); //avant-arrière
-        transform.Translate(Vector3.right * MoveSpeed * h * Time.deltaTime);    //gauche-droite
-        transform.Rotate(Vector3.up * TurnSpeed * hCam * Time.deltaTime);       //caméra gauche-droite
-        
+        transform.Translate(-Vector3.forward * MoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime); //personnage avant-arrière
+        transform.Translate(Vector3.right * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime);    //personnage gauche-droite
 
         //marche coquine lorsque B est appuyé
         if (Input.GetButtonDown("GirlWalk"))
