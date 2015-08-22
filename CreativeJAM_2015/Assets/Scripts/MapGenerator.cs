@@ -13,6 +13,7 @@ public class MapGenerator : MonoBehaviour {
 	public int maxRooms;
 	public float withRoom;
     public int maxRessource;
+    public List<GameObject> listSpawnnerTemp;
 
 	private int[,] corArray;
     private int[,] colorRooms;
@@ -115,13 +116,11 @@ public class MapGenerator : MonoBehaviour {
 
         spawns = GameObject.FindGameObjectsWithTag("spwannerRessource");
         List<GameObject> listSpawnner = new List<GameObject>(spawns);
-        List<GameObject> listSpawnnerTemp = listSpawnner;
+        listSpawnnerTemp = listSpawnner;
 
         for (int i = 0; i < maxRessource; i++)
         {
-            randomIndexList = Random.Range(0, listSpawnnerTemp.Count);
-            Instantiate(ressource, listSpawnnerTemp[randomIndexList].transform.position, Quaternion.identity);
-            listSpawnnerTemp.RemoveAt(randomIndexList);
+            spawnUneRessource();
         }
 
         for (int j = 0; j < maxSizeX; j++)
@@ -202,5 +201,12 @@ public class MapGenerator : MonoBehaviour {
             maColor = colorRooms[x, y];
             //add la texture
         }*/
+    }
+
+    public void spawnUneRessource()
+    {
+        randomIndexList = Random.Range(0, listSpawnnerTemp.Count);
+        Instantiate(ressource, listSpawnnerTemp[randomIndexList].transform.position, Quaternion.identity);
+        listSpawnnerTemp.RemoveAt(randomIndexList);
     }
 }
