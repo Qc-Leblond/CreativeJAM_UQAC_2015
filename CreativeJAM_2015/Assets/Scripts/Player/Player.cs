@@ -29,9 +29,9 @@ public class Player : MonoBehaviour {
 	void Awake () {
 
         //Initialisation des variables
-        //ego = 100f; //Valeur temporaire
         isGirlWalking = false;
         nbrJunk = 0;  //Valeur temporaire
+        ego = 100f; //Valeur temporaire
 
     }
 
