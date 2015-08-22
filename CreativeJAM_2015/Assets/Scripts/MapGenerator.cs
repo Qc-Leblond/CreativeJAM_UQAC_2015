@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour {
     Vector3 garagePosition;
 
 	// Use this for initialization
-	public void SpawnGen () {
+	public void SpawnGen() {
 		corArray = new int[maxSizeX,maxSizeY];
         colorRooms = new int[maxSizeX, maxSizeY];
 		startPosition = Random.Range (0, maxSizeX);

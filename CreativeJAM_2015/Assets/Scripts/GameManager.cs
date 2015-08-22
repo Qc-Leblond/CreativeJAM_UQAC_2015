@@ -17,20 +17,7 @@ public class GameManager : MonoBehaviour {
         public Player playerScript;
 
        //Variable qui contient le doute de sur le joueur (doubt)
-       public float doubt
-       {
-            get
-            {
-                return doubt;
-            }
-            private set
-            {
-                //Ici si jamais on veut gere quoi faire avant que le doubt se rendre soit <= 0
-                Debug.Log("Valeur du doute :" + value);
-                doubt = value;
-            }
-
-        }
+       public float doubt {get; private set;}
 
         [Header("Level Related")]
         public Scene currentScene = Scene.main;
@@ -91,16 +78,7 @@ public class GameManager : MonoBehaviour {
     #region On Level Load
 
     void OnMainLoad() {
-        initiatePlayersStates(playerScript);
         doubt = 0;
-    }
-
-    //Fonction pour initialiser les info sur le joueur ego, isGirlWalking etc...
-    void initiatePlayersStates(Player thePlayerScript)
-    {
-        thePlayerScript.nbrJunk = 0; //Valeur temporaire
-        thePlayerScript.isGirlWalking = false;
-        thePlayerScript.ego = 100f; //Valeur temporaire
     }
 
     #endregion
@@ -110,7 +88,7 @@ public class GameManager : MonoBehaviour {
     public enum Scene {
         menu,
         cinematicIntro,
-        main,
+        main
     }
 
     public void SwitchScene(Scene scene) {
