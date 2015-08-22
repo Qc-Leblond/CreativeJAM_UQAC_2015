@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour {
 	void Start () {
 
         egoSlider.value = 100;
-        doubtSlider.value = 0;
+        //doubtSlider.value = 0;
 
 	}
 	

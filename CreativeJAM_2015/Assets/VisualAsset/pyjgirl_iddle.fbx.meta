@@ -1,0 +1,205 @@
+fileFormatVersion: 2
+guid: 5d61a1637a184114eb5cb7299529262b
+timeCreated: 1440278871
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: pyjgirl_ankle_lf_jnt
+    100002: pyjgirl_ankle_rt_jnt
+    100004: pyjgirl_ball_lf_jnt
+    100006: pyjgirl_ball_rt_jnt
+    100008: pyjgirl_clav_lf_ctrl_grp
+    100010: pyjgirl_clav_lf_jnt
+    100012: pyjgirl_clav_rt_ctrl_grp
+    100014: pyjgirl_clav_rt_jnt
+    100016: pyjgirl_elbow_lf_jnt
+    100018: pyjgirl_elbow_rt_jnt
+    100020: pyjgirl_eye_lf_jnt
+    100022: pyjgirl_eye_rt_jnt
+    100024: pyjgirl_eyebrowIn_lf_jnt
+    100026: pyjgirl_eyebrowIn_rt_jnt
+    100028: pyjgirl_eyebrowMid_lf_jnt
+    100030: pyjgirl_eyebrowMid_rt_jnt
+    100032: pyjgirl_eyebrowOut_lf_jnt
+    100034: pyjgirl_eyebrowOut_rt_jnt
+    100036: pyjgirl_eyelid_lf_jnt
+    100038: pyjgirl_eyelid_rt_jnt
+    100040: pyjgirl_face_ctrl_grp
+    100042: pyjgirl_finger_end_lf_jnt
+    100044: pyjgirl_finger_end_rt_jnt
+    100046: pyjgirl_finger_lf_ctrl_grp
+    100048: pyjgirl_finger_lf_jnt
+    100050: pyjgirl_finger_rt_ctrl_grp
+    100052: pyjgirl_finger_rt_jnt
+    100054: pyjgirl_geo
+    100056: pyjgirl_head_ctrl_grp
+    100058: pyjgirl_head_end_jnt
+    100060: pyjgirl_head_jnt
+    100062: pyjgirl_heel_lf_jnt
+    100064: pyjgirl_heel_rt_jnt
+    100066: pyjgirl_hip_lf_jnt
+    100068: pyjgirl_hip_rt_jnt
+    100070: //RootNode
+    100072: pyjgirl_knee_lf_jnt
+    100074: pyjgirl_knee_rt_jnt
+    100076: pyjgirl_mouth1_jnt
+    100078: pyjgirl_mouth2_jnt
+    100080: pyjgirl_mouth3_jnt
+    100082: pyjgirl_mouth4_jnt
+    100084: pyjgirl_mouth5_jnt
+    100086: pyjgirl_mouth6_jnt
+    100088: pyjgirl_mouth7_jnt
+    100090: pyjgirl_neck_ctrl_grp
+    100092: pyjgirl_neck_jnt
+    100094: pyjgirl_root_jnt
+    100096: pyjgirl_shoulder_lf_jnt
+    100098: pyjgirl_shoulder_rt_jnt
+    100100: pyjgirl_spineA_ctrl_grp
+    100102: pyjgirl_spineA_jnt
+    100104: pyjgirl_spineB_ctrl_grp
+    100106: pyjgirl_spineB_jnt
+    100108: pyjgirl_thumb_end_lf_jnt
+    100110: pyjgirl_thumb_end_rt_jnt
+    100112: pyjgirl_thumb_lf_ctrl_grp
+    100114: pyjgirl_thumb_lf_jnt
+    100116: pyjgirl_thumb_rt_ctrl_grp
+    100118: pyjgirl_thumb_rt_jnt
+    100120: pyjgirl_toes_lf_jnt
+    100122: pyjgirl_toes_rt_jnt
+    100124: pyjgirl_waist_ctrl_grp
+    100126: pyjgirl_waist_jnt
+    100128: pyjgirl_wrist_lf_jnt
+    100130: pyjgirl_wrist_rt_jnt
+    400000: pyjgirl_ankle_lf_jnt
+    400002: pyjgirl_ankle_rt_jnt
+    400004: pyjgirl_ball_lf_jnt
+    400006: pyjgirl_ball_rt_jnt
+    400008: pyjgirl_clav_lf_ctrl_grp
+    400010: pyjgirl_clav_lf_jnt
+    400012: pyjgirl_clav_rt_ctrl_grp
+    400014: pyjgirl_clav_rt_jnt
+    400016: pyjgirl_elbow_lf_jnt
+    400018: pyjgirl_elbow_rt_jnt
+    400020: pyjgirl_eye_lf_jnt
+    400022: pyjgirl_eye_rt_jnt
+    400024: pyjgirl_eyebrowIn_lf_jnt
+    400026: pyjgirl_eyebrowIn_rt_jnt
+    400028: pyjgirl_eyebrowMid_lf_jnt
+    400030: pyjgirl_eyebrowMid_rt_jnt
+    400032: pyjgirl_eyebrowOut_lf_jnt
+    400034: pyjgirl_eyebrowOut_rt_jnt
+    400036: pyjgirl_eyelid_lf_jnt
+    400038: pyjgirl_eyelid_rt_jnt
+    400040: pyjgirl_face_ctrl_grp
+    400042: pyjgirl_finger_end_lf_jnt
+    400044: pyjgirl_finger_end_rt_jnt
+    400046: pyjgirl_finger_lf_ctrl_grp
+    400048: pyjgirl_finger_lf_jnt
+    400050: pyjgirl_finger_rt_ctrl_grp
+    400052: pyjgirl_finger_rt_jnt
+    400054: pyjgirl_geo
+    400056: pyjgirl_head_ctrl_grp
+    400058: pyjgirl_head_end_jnt
+    400060: pyjgirl_head_jnt
+    400062: pyjgirl_heel_lf_jnt
+    400064: pyjgirl_heel_rt_jnt
+    400066: pyjgirl_hip_lf_jnt
+    400068: pyjgirl_hip_rt_jnt
+    400070: //RootNode
+    400072: pyjgirl_knee_lf_jnt
+    400074: pyjgirl_knee_rt_jnt
+    400076: pyjgirl_mouth1_jnt
+    400078: pyjgirl_mouth2_jnt
+    400080: pyjgirl_mouth3_jnt
+    400082: pyjgirl_mouth4_jnt
+    400084: pyjgirl_mouth5_jnt
+    400086: pyjgirl_mouth6_jnt
+    400088: pyjgirl_mouth7_jnt
+    400090: pyjgirl_neck_ctrl_grp
+    400092: pyjgirl_neck_jnt
+    400094: pyjgirl_root_jnt
+    400096: pyjgirl_shoulder_lf_jnt
+    400098: pyjgirl_shoulder_rt_jnt
+    400100: pyjgirl_spineA_ctrl_grp
+    400102: pyjgirl_spineA_jnt
+    400104: pyjgirl_spineB_ctrl_grp
+    400106: pyjgirl_spineB_jnt
+    400108: pyjgirl_thumb_end_lf_jnt
+    400110: pyjgirl_thumb_end_rt_jnt
+    400112: pyjgirl_thumb_lf_ctrl_grp
+    400114: pyjgirl_thumb_lf_jnt
+    400116: pyjgirl_thumb_rt_ctrl_grp
+    400118: pyjgirl_thumb_rt_jnt
+    400120: pyjgirl_toes_lf_jnt
+    400122: pyjgirl_toes_rt_jnt
+    400124: pyjgirl_waist_ctrl_grp
+    400126: pyjgirl_waist_jnt
+    400128: pyjgirl_wrist_lf_jnt
+    400130: pyjgirl_wrist_rt_jnt
+    4300000: pyjgirl_geo
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: pyjgirl_geo
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -7,13 +7,13 @@ public class Player : MonoBehaviour {
     //********************************************************************************************//
         
         //Variable qui represente les points "ego" du personnage. Une gauge representera sa valeur pour le joueur
-        private float ego;
+        public float ego;
 
         //Variable qui sert a savoir si le joueur est entrain de marcher comme un fille (Cette variable sera modifier directement par le controler avec une fonction du genre SET)
-        private bool isGirlWalking;
+        public bool isGirlWalking;
 
         //Variable qui garde en memoire le nombre de Junk que le joueur a amasser.
-        private int nbrJunk;
+        public int nbrJunk;
 
         //Variable pour set le l'ego qu'on perd quand on girlWalk (on gagane de l'ego si on fait un tour)
         public float egoDownSpeed;
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
 	void Awake () {
 
         //Initialisation des variables
-        ego = 100f; //Valeur temporaire
+        //ego = 100f; //Valeur temporaire
         isGirlWalking = false;
         nbrJunk = 0;  //Valeur temporaire
 
@@ -40,12 +40,13 @@ public class Player : MonoBehaviour {
         uiManager = GoUiManager.GetComponent<UIManager>();
     }
 
-    void update()
+    void Update()
     {
         if (isGirlWalking)
         {
             //On doit descendre l'ego du joueur
             ego = ego - egoDownSpeed;//Valeur set dans l'interface unity
+            Debug.Log(ego);
             uiManager.setEgoSliderValue(ego);
             //On verifie si l'ego est = 0
             if (ego <= 0)
