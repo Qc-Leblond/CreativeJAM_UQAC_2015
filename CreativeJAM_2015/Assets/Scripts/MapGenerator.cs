@@ -13,6 +13,7 @@ public class MapGenerator : MonoBehaviour {
 	public int maxRooms;
 	public float withRoom;
     public int maxRessource;
+    public List<GameObject> listSpawnnerTemp;
 
 	private int[,] corArray;
     private int[,] colorRooms;
@@ -115,7 +116,7 @@ public class MapGenerator : MonoBehaviour {
 
         spawns = GameObject.FindGameObjectsWithTag("spwannerRessource");
         List<GameObject> listSpawnner = new List<GameObject>(spawns);
-        List<GameObject> listSpawnnerTemp = listSpawnner;
+        listSpawnnerTemp = listSpawnner;
 
         for (int i = 0; i < maxRessource; i++)
         {
