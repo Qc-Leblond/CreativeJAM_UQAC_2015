@@ -4,6 +4,7 @@ using System.Collections;
 public class BombItem : MonoBehaviour {
 
     public GUIText textBomb;
+    public float radius;
 	// Use this for initialization
 	void Start () {
         StartCoroutine("explode");
@@ -23,9 +24,25 @@ public class BombItem : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         textBomb.text = "";
         gameObject.GetComponent<CapsuleCollider>().enabled = true;
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, hitColliders[i].transform.position - transform.position, out hit))
+            {
+                if (hit.transform.tag == "Girl")
+                {
+                    hitColliders[i].transform.GetComponent<Girl_AI>().SwitchState(Girl_AI.State.crying);
+                    i++;
+                }
+            }
+        }
     }
 
-    void OnTriggerEnter(Collider other)
+    /*void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Girl")
         {
@@ -39,5 +56,5 @@ public class BombItem : MonoBehaviour {
                 }
             }
         }
-    }
+    }*/
 }
