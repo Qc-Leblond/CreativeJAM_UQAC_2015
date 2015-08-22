@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
         public GameObject playerGO;
 
         //Varaible qui contient le scrpit du player
-        private Player playerScript;
+        public Player playerScript;
 
         //Variable qui contient le doute de sur le joueur (doubt)
         private float doubt;    
