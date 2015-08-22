@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Girl_AI : MonoBehaviour {
 
+    [HideInInspector]
     public NavMeshAgent girlPathingAI;
     Dictionary<State, AIState> stateDictionary = new Dictionary<State, AIState>();
     public enum State {
@@ -21,7 +22,8 @@ public class Girl_AI : MonoBehaviour {
     public bool isStuck = false;
 
     public static AI_DestinationPointsList possibleDestinations;
-    public AI_DestinationPoint currentPos; //TODO add on spawn
+    [HideInInspector]
+    public AI_DestinationPoint currentPos;
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
