@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour {
     public Slider egoSlider;
     public Slider doubtSlider;
 
+    public Text girlRemaining;
+
 	// Use this for initialization
 	void Start () {
 
@@ -26,5 +28,10 @@ public class UIManager : MonoBehaviour {
     {
         egoSlider.value = value;
         //Debug.Log(value);
+    }
+
+    public void setGirlRamaining(int value)
+    { 
+
     }
 }

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
         public int numberOfGirlSpawned;
         [HideInInspector]
         public int currentNumberOfGirl;
+        public GameObject characterController;
 
     //********************************************************************************************//
 
@@ -37,8 +38,6 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            playerGO = GameObject.FindGameObjectWithTag("Player");
-            playerScript = playerGO.GetComponent<Player>();
             timer = gameObject.AddComponent<Timer>();
             switch (currentScene) {
                 case Scene.menu:
@@ -87,6 +86,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void OnGirlCrying(){
+        currentNumberOfGirl--;
+    }
+
     #region On Level Load
 
     void OnMainLoad() {
@@ -106,13 +109,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void SwitchScene(Scene scene) {
+        currentScene = scene;
         switch (scene) {
             case Scene.menu:
-                Application.LoadLevel("Menu");
+                Application.LoadLevel("Intro");
                 break;
 
             case Scene.cinematicIntro:
-                Application.LoadLevel("Intro");
                 StartCinematic();
                 break;
 
@@ -140,7 +143,8 @@ public class GameManager : MonoBehaviour {
 
     public void OnGameStart() {
         timer.TimerStart();
-        playerGO.transform.position = mapGenerator.garagePosition;//Spawn Player
+        playerGO = (Instantiate(characterController, mapGenerator.garagePosition, Quaternion.identity) as GameObject);//Spawn Player
+        playerScript = playerGO.GetComponentInChildren<Player>();
         currentNumberOfGirl = numberOfGirlSpawned;
         //Spawn Girl
         for (int i = 0; i < numberOfGirlSpawned; i++) {
@@ -150,6 +154,8 @@ public class GameManager : MonoBehaviour {
 
     public void OnGameEnd(GameResult result) {
         timer.TimerStop();
+        AddToScore(Mathf.CeilToInt(timer.TimeLeft * 10), Vector3.zero, ScoreType.time, false);
+        AddToScore(Mathf.CeilToInt(-doubt * 5), Vector3.zero, ScoreType.doubt, false);
         StartCoroutine(OnGameEndCoroutine());
     }
 
@@ -168,38 +174,15 @@ public class GameManager : MonoBehaviour {
     public float finalHeight;
     public float risingSpeed;
     public float cinematicCameraAnimTime;
-    private float cameraRotation;
 
     private void StartCinematic() {
         cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        cinematicCamera.transform.localPosition = new Vector3(0, -0.2f, -1.6f);
-        playerGO.transform.position = new Vector3(0, 0.2f, 17f);
-        cameraRotation = 0;
         StartCoroutine(CinematicAnim());
     }
 
     IEnumerator CinematicAnim() {
-        Camera main = Camera.main;
-        Camera.main.enabled = false;
-        cinematicCamera.enabled = true;
-        while (!MoveCamera(0.25f, -0.15f)) {
-            yield return new WaitForEndOfFrame();
-        }
-        while (playerGO.transform.position.y < finalHeight) {
-            playerGO.transform.position += new Vector3(0, risingSpeed * Time.deltaTime, 0);
-            yield return new WaitForEndOfFrame();
-        }
+        GameObject.FindGameObjectWithTag("IntroAnim").GetComponent<Animator>().SetBool("Start", true);
         yield return new WaitForSeconds(DelayBetween);
-        /*while (!TurnCamera() & !MoveCamera()) {
-            yield return new WaitForEndOfFrame();
-        }*/
-        yield return new WaitForSeconds(0.5f);
-        cinematicCamera.transform.localPosition = playerGO.transform.position + new Vector3(0, -3f, -3f);
-        cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        while (MoveCamera(-2f, 7f)) {
-            yield return new WaitForEndOfFrame();
-        }
-        yield return new WaitForSeconds(0.5f);
         SwitchScene(Scene.main);
     }
 
@@ -219,9 +202,9 @@ public class GameManager : MonoBehaviour {
 
     public int score { get; private set; }
     public GameObject scoreText;
-    public int scoreDoubt = 0;
-    public int scoreTime = 0;
-    public int scoreCrying = 0;
+    public int scoreDoubt = 0; //Implemented
+    public int scoreTime = 0; //Implemented
+    public int scoreCrying = 0; //Implemented
     public int scoreCombo = 0;
 
     public enum ScoreType {
@@ -232,10 +215,12 @@ public class GameManager : MonoBehaviour {
     }
 
 
-    public void AddToScore(int modification, Vector3 pos, ScoreType type) {
-        TextMesh display = ((GameObject)Instantiate(scoreText, pos + new Vector3(0, 5, 0), Quaternion.Euler(Vector3.zero))).GetComponent<TextMesh>();
-        display.transform.localScale = new Vector3(Mathf.CeilToInt(modification / 300), Mathf.CeilToInt(modification / 300), 1);
-        StartCoroutine(ScoreTextAnim(display.gameObject));
+    public void AddToScore(int modification, Vector3 pos, ScoreType type, bool visual = true) {
+        if (visual) {
+            TextMesh display = ((GameObject)Instantiate(scoreText, pos + new Vector3(0, 5, 0), Quaternion.Euler(Vector3.zero))).GetComponent<TextMesh>();
+            display.transform.localScale = new Vector3(Mathf.CeilToInt(modification / 300), Mathf.CeilToInt(modification / 300), 1);
+            StartCoroutine(ScoreTextAnim(display.gameObject));
+        }
         switch (type) {
             case ScoreType.doubt:
                 scoreDoubt += modification;
