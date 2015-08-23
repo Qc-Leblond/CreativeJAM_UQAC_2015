@@ -29,7 +29,7 @@ public class MapGenerator : MonoBehaviour {
 	char caseSwitch;
 	Vector3 instancePosition;
 	Vector3 fillerPosition;
-    Vector3 garagePosition;
+    public Vector3 garagePosition;
 
 	// Use this for initialization
 	public void SpawnGen() {
