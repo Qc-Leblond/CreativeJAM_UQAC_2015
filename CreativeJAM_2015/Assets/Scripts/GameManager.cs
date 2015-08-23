@@ -216,14 +216,39 @@ public class GameManager : MonoBehaviour {
 
     #region Score
 
-    [Header("Score Related")]
     public int score { get; private set; }
     private GameObject scoreText = ((GameObject)Resources.Load("Score"));
+    public int scoreDoubt = 0;
+    public int scoreTime = 0;
+    public int scoreCrying = 0;
+    public int scoreCombo = 0;
 
-    public void AddToScore(int modification, Vector3 pos) {
+    public enum ScoreType {
+        doubt,
+        time,
+        crying, 
+        combo
+    }
+
+
+    public void AddToScore(int modification, Vector3 pos, ScoreType type) {
         TextMesh display = ((GameObject)Instantiate(scoreText, pos + new Vector3(0, 5, 0), Quaternion.Euler(Vector3.zero))).GetComponent<TextMesh>();
         display.transform.localScale = new Vector3(Mathf.CeilToInt(modification / 300), Mathf.CeilToInt(modification / 300), 1);
         StartCoroutine(ScoreTextAnim(display.gameObject));
+        switch (type) {
+            case ScoreType.doubt:
+                scoreDoubt += modification;
+                break;
+            case ScoreType.time:
+                scoreTime += modification;
+                break;
+            case ScoreType.crying:
+                scoreCrying += modification;
+                break;
+            case ScoreType.combo:
+                scoreCombo += modification;
+                break;
+        }
     }
 
     IEnumerator ScoreTextAnim(GameObject display) {
@@ -233,7 +258,7 @@ public class GameManager : MonoBehaviour {
         while (display.transform.position.y < pos.y + 10) {
             MeshRenderer render = display.GetComponent<MeshRenderer>();
             alpha -= 255f / time * Time.deltaTime;
-            render.material.color = new Color(render.material.color.r, render.material.color.g, render.material.color.b, alpha);
+            render.material.color = new Color(render.material.color.r, render.material.color.g, render.material.color.b, alpha/255);
             display.transform.position += new Vector3(0, 10 / time * Time.deltaTime, 0);
             yield return new WaitForEndOfFrame();
         }
