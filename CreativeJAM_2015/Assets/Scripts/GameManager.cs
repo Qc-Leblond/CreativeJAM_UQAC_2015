@@ -16,12 +16,17 @@ public class GameManager : MonoBehaviour {
         [HideInInspector]
         public Player playerScript;
 
-       //Variable qui contient le doute de sur le joueur (doubt)
-       public float doubt {get; private set;}
+        //Variable qui contient le doute de sur le joueur (doubt)
+        public float doubt {get; private set;}
+        public float maxDoubt;
 
         [Header("Level Related")]
         public Scene currentScene = Scene.main;
         public MapGenerator mapGenerator;
+        public Timer timer;
+        public int numberOfGirlSpawned;
+        [HideInInspector]
+        public int currentNumberOfGirl;
 
     //********************************************************************************************//
 
@@ -34,6 +39,7 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
             playerGO = GameObject.FindGameObjectWithTag("Player");
             playerScript = playerGO.GetComponent<Player>();
+            timer = gameObject.AddComponent<Timer>();
             switch (currentScene) {
                 case Scene.menu:
                     break;
@@ -43,8 +49,8 @@ public class GameManager : MonoBehaviour {
                     break;
 
                 case Scene.main:
-                    OnMainLoad();
                     mapGenerator.SpawnGen();
+                    OnMainLoad();
                     break;
             }
         }
@@ -60,6 +66,12 @@ public class GameManager : MonoBehaviour {
     }
 
     void update() {
+        if (doubt >= maxDoubt) {
+            OnGameEnd(GameResult.lost);
+        }
+        if (currentNumberOfGirl <= 0) {
+            OnGameEnd(GameResult.won);
+        }
         HandleGirlWalking();
     }
 
@@ -79,6 +91,7 @@ public class GameManager : MonoBehaviour {
 
     void OnMainLoad() {
         doubt = 0;
+        OnGameStart();
     }
 
     #endregion
@@ -88,7 +101,8 @@ public class GameManager : MonoBehaviour {
     public enum Scene {
         menu,
         cinematicIntro,
-        main
+        main,
+        recapEnd
     }
 
     public void SwitchScene(Scene scene) {
@@ -107,14 +121,41 @@ public class GameManager : MonoBehaviour {
                 OnMainLoad();
                 mapGenerator.SpawnGen();
                 break;
+            case Scene.recapEnd:
+                Application.LoadLevel("RecapEnd");
+                break;
         }
     }
 
     #endregion
 
-    #region Timer Related
+    #region Time Related
 
+    private GameObject girl = Resources.Load("Girl") as GameObject;
 
+    public enum GameResult {
+        won,
+        lost
+    }
+
+    public void OnGameStart() {
+        timer.TimerStart();
+        playerGO.transform.position = mapGenerator.garagePosition;
+        currentNumberOfGirl = numberOfGirlSpawned;
+        for (int i = 0; i < numberOfGirlSpawned; i++) {
+            Instantiate(girl);
+        }
+    }
+
+    public void OnGameEnd(GameResult result) {
+        timer.TimerStop();
+        StartCoroutine(OnGameEndCoroutine());
+    }
+
+    IEnumerator OnGameEndCoroutine() {
+        yield return new WaitForSeconds(1); //Temporary TODO
+        SwitchScene(Scene.recapEnd);
+    }
 
     #endregion
 
@@ -171,6 +212,34 @@ public class GameManager : MonoBehaviour {
         return cinematicCamera.transform.localPosition.z >= destination;
     }
     
+    #endregion
+
+    #region Score
+
+    [Header("Score Related")]
+    public int score { get; private set; }
+    private GameObject scoreText = ((GameObject)Resources.Load("Score"));
+
+    public void AddToScore(int modification, Vector3 pos) {
+        TextMesh display = ((GameObject)Instantiate(scoreText, pos + new Vector3(0, 5, 0), Quaternion.Euler(Vector3.zero))).GetComponent<TextMesh>();
+        display.transform.localScale = new Vector3(Mathf.CeilToInt(modification / 300), Mathf.CeilToInt(modification / 300), 1);
+        StartCoroutine(ScoreTextAnim(display.gameObject));
+    }
+
+    IEnumerator ScoreTextAnim(GameObject display) {
+        Vector3 pos = display.transform.position;
+        float time = 2;
+        float alpha = 255f;
+        while (display.transform.position.y < pos.y + 10) {
+            MeshRenderer render = display.GetComponent<MeshRenderer>();
+            alpha -= 255f / time * Time.deltaTime;
+            render.material.color = new Color(render.material.color.r, render.material.color.g, render.material.color.b, alpha);
+            display.transform.position += new Vector3(0, 10 / time * Time.deltaTime, 0);
+            yield return new WaitForEndOfFrame();
+        }
+        Destroy(display);
+    }
+
     #endregion
 
 }
