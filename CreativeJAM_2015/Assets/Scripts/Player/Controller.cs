@@ -14,12 +14,14 @@ public class Controller : MonoBehaviour
                 objectSelected = 0;  //Objet sélectioné 
     public GameObject Camera;        //Caméra attachée au joueur
     private Player player;           //Script vers Player
+    private Rigidbody rigidBody;
     
     void Awake()
     {
         Cursor.visible = false; 
         player = this.GetComponent<Player>();
         isAxisInUse = false;
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     void Update ()
@@ -83,4 +85,11 @@ public class Controller : MonoBehaviour
             //Do something fun :D
         }
 	}
+
+    void OnCollisionEnter(Collision collision)
+    {
+        rigidBody.isKinematic = true;
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.isKinematic = false;
+    }
 }
