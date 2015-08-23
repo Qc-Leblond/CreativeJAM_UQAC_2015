@@ -17,6 +17,7 @@ public class Controller : MonoBehaviour
     private Rigidbody rigidBody;
     private Inventaire inventaire;
     private Inventory inventory;
+    private Animator anim;
     
     void Awake()
     {
@@ -26,6 +27,7 @@ public class Controller : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         inventaire = GetComponent<Inventaire>();
         inventory = GetComponent<Inventory>();
+        anim = GetComponent<Animator>();
     }
 
     void Update ()
@@ -40,16 +42,32 @@ public class Controller : MonoBehaviour
         transform.Translate(-Vector3.forward * MoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime); //personnage avant-arrière
         transform.Translate(Vector3.right * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime);    //personnage gauche-droite
 
+        //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) 
+           // anim.SetBool("Walk", true);
+
         //marche coquine lorsque B est appuyé
         if (Input.GetButtonDown("GirlWalk"))
         {
-            player.isGirlWalking = true;
-            MoveSpeed = 2f;
+            if (player.ego <= 0)
+            {
+                //anim.GetComponent<Animation>().Stop();
+                anim.SetBool("GirlWalk", false);;
+                player.isGirlWalking = false;
+                MoveSpeed = 5f;
+            } 
+            else
+            {
+                anim.SetBool("GirlWalk", true);
+                anim.SetBool("Walk", false);
+                player.isGirlWalking = true;
+                MoveSpeed = 2f;
+            }
         }
 
         //fin de la marche coquine lorsque B est relâché
         if (Input.GetButtonUp("GirlWalk"))
         {
+            anim.SetBool("GirlWalk", false);
             player.isGirlWalking = false;
             MoveSpeed = 5f;
         }

@@ -17,6 +17,7 @@ public class StatsScreen_Getter : MonoBehaviour {
     void Awake() {
         switch (stat) {
             case Info.girlCrying:
+
                 GetComponent<Text>().text = GameManager.instance.scoreCrying.ToString();
                 break;
             case Info.combos:
