@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour {
                     break;
 
                 case Scene.main:
+                    cinematicCamera.enabled = false;
                     mapGenerator.SpawnGen();
                     OnMainLoad();
                     break;
@@ -137,6 +138,7 @@ public class GameManager : MonoBehaviour {
 
             case Scene.main:
                 Application.LoadLevel("Main");
+                cinematicCamera.enabled = false;
                 mapGenerator.SpawnGen();
                 OnMainLoad();
                 break;
