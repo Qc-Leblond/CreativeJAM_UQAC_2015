@@ -50,9 +50,6 @@ public class Controller : MonoBehaviour
 
         transform.Translate(-Vector3.forward * MoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime); //personnage avant-arrière
         transform.Translate(Vector3.right * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime);    //personnage gauche-droite
-
-        Debug.Log(Input.GetAxisRaw("Horizontal"));
-        Debug.Log(Input.GetAxisRaw("Vertical"));
         
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
@@ -177,8 +174,8 @@ public class Controller : MonoBehaviour
                     if (inventaire.NbrItems[1] > 0)
                         Instantiate(Bombe, ghostBombe.transform.position, Quaternion.identity);
                     
-                    inventaire.RemoveItem(1);
                     ghostBombe.SetActive(false);
+                    inventaire.RemoveItem(1);
                     break;
                 case 2:
                     if (inventaire.NbrItems[2] > 0)

@@ -226,10 +226,10 @@ public class AIState_Doubtful : AIState {
         }
     }
     public override void Running() {
-        Debug.DrawLine(new Vector3(playerPos.position.x, girlAI.girlPosY, playerPos.position.z), girlAI.GetGirlPos(), Color.red, 1f);
         girlAI.transform.rotation = Quaternion.Slerp(girlAI.transform.rotation,
                                                      Quaternion.LookRotation(new Vector3(playerPos.position.x, girlAI.girlPosY, playerPos.position.z) - girlAI.GetGirlPos()),
                                                      Time.deltaTime * girlAI.lookatRotationSpeed);
+        GameManager.instance.AddDoubt(5 * Time.deltaTime);
     }
     public override void Finish() {
         girlAI.fieldOfViewVisual.material.color = girlAI.noDoubt;
