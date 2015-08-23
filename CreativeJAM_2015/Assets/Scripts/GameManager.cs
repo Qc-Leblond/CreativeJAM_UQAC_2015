@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour {
                     break;
 
                 case Scene.main:
-                    cinematicCamera.enabled = false;
                     mapGenerator.SpawnGen();
                     OnMainLoad();
                     break;
@@ -91,10 +90,16 @@ public class GameManager : MonoBehaviour {
     }
 
     public void AddDoubt(float mod) {
-        if (doubt <= maxDoubt)
-            doubt += mod;
-        else
-            doubt = maxDoubt;
+        if (mod > 0) {
+            if (doubt <= maxDoubt)
+                doubt += mod;
+            else
+                doubt = maxDoubt;
+        }
+        else {
+            doubt -= mod;
+            if (doubt < 0) doubt = 0;
+        }
     }
 
     public void OnGirlCrying(){
@@ -138,7 +143,6 @@ public class GameManager : MonoBehaviour {
 
             case Scene.main:
                 Application.LoadLevel("Main");
-                cinematicCamera.enabled = false;
                 mapGenerator.SpawnGen();
                 OnMainLoad();
                 break;
