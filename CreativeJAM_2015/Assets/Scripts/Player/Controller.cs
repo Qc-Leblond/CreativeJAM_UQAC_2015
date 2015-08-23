@@ -42,36 +42,32 @@ public class Controller : MonoBehaviour
         transform.Translate(-Vector3.forward * MoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime); //personnage avant-arrière
         transform.Translate(Vector3.right * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime);    //personnage gauche-droite
 
+        //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) 
+           // anim.SetBool("Walk", true);
+
         //marche coquine lorsque B est appuyé
         if (Input.GetButtonDown("GirlWalk"))
         {
-            Debug.Log("caa");
             if (player.ego <= 0)
             {
-                
-                anim.GetComponent<Animation>().Stop();
-                anim.SetBool("GirlWalking", false);
-               
-                //anim.SetTrigger("Walk");
+                //anim.GetComponent<Animation>().Stop();
+                anim.SetBool("GirlWalk", false);;
                 player.isGirlWalking = false;
                 MoveSpeed = 5f;
             } 
             else
             {
-                anim.SetBool("GirlWalking", true);
+                anim.SetBool("GirlWalk", true);
+                anim.SetBool("Walk", false);
                 player.isGirlWalking = true;
                 MoveSpeed = 2f;
             }
-           
-
-             
         }
 
         //fin de la marche coquine lorsque B est relâché
         if (Input.GetButtonUp("GirlWalk"))
         {
-            anim.SetBool("GirlWalking", false);
-            anim.SetTrigger("Walk");
+            anim.SetBool("GirlWalk", false);
             player.isGirlWalking = false;
             MoveSpeed = 5f;
         }
