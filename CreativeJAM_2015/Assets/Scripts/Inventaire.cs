@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Inventaire : MonoBehaviour 
 {
-    public int Junk = 90;
+    public int Junk;
     public int[] NbrItems = new int[4];
     public GameObject[] Nombres = new GameObject[5];
     private Animator anim;
@@ -39,5 +39,5 @@ public class Inventaire : MonoBehaviour
             anim.SetTrigger("DropItem");
             NbrItems[Number]--;
         }
-    }   
+    }
 }
