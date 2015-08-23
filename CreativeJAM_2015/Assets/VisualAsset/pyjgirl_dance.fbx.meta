@@ -158,7 +158,169 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+<<<<<<< HEAD
     clipAnimations: []
+=======
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: pyjgirl_geo
+        weight: 1
+      - path: pyjgirl_root_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt/pyjgirl_elbow_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt/pyjgirl_elbow_lf_jnt/pyjgirl_wrist_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt/pyjgirl_elbow_lf_jnt/pyjgirl_wrist_lf_jnt/pyjgirl_finger_lf_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt/pyjgirl_elbow_lf_jnt/pyjgirl_wrist_lf_jnt/pyjgirl_finger_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt/pyjgirl_elbow_lf_jnt/pyjgirl_wrist_lf_jnt/pyjgirl_finger_lf_jnt/pyjgirl_finger_end_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt/pyjgirl_elbow_lf_jnt/pyjgirl_wrist_lf_jnt/pyjgirl_thumb_lf_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt/pyjgirl_elbow_lf_jnt/pyjgirl_wrist_lf_jnt/pyjgirl_thumb_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_lf_jnt/pyjgirl_shoulder_lf_jnt/pyjgirl_elbow_lf_jnt/pyjgirl_wrist_lf_jnt/pyjgirl_thumb_lf_jnt/pyjgirl_thumb_end_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt/pyjgirl_elbow_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt/pyjgirl_elbow_rt_jnt/pyjgirl_wrist_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt/pyjgirl_elbow_rt_jnt/pyjgirl_wrist_rt_jnt/pyjgirl_finger_rt_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt/pyjgirl_elbow_rt_jnt/pyjgirl_wrist_rt_jnt/pyjgirl_finger_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt/pyjgirl_elbow_rt_jnt/pyjgirl_wrist_rt_jnt/pyjgirl_finger_rt_jnt/pyjgirl_finger_end_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt/pyjgirl_elbow_rt_jnt/pyjgirl_wrist_rt_jnt/pyjgirl_thumb_rt_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt/pyjgirl_elbow_rt_jnt/pyjgirl_wrist_rt_jnt/pyjgirl_thumb_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_clav_rt_jnt/pyjgirl_shoulder_rt_jnt/pyjgirl_elbow_rt_jnt/pyjgirl_wrist_rt_jnt/pyjgirl_thumb_rt_jnt/pyjgirl_thumb_end_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eye_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eye_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eyebrowIn_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eyebrowIn_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eyebrowMid_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eyebrowMid_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eyebrowOut_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eyebrowOut_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eyelid_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_eyelid_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_face_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_mouth1_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_mouth2_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_mouth3_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_mouth4_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_mouth5_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_mouth6_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_spineA_jnt/pyjgirl_spineB_jnt/pyjgirl_neck_jnt/pyjgirl_head_jnt/pyjgirl_head_end_jnt/pyjgirl_mouth7_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_ctrl_grp
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_lf_jnt/pyjgirl_knee_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_lf_jnt/pyjgirl_knee_lf_jnt/pyjgirl_ankle_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_lf_jnt/pyjgirl_knee_lf_jnt/pyjgirl_ankle_lf_jnt/pyjgirl_heel_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_lf_jnt/pyjgirl_knee_lf_jnt/pyjgirl_ankle_lf_jnt/pyjgirl_heel_lf_jnt/pyjgirl_ball_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_lf_jnt/pyjgirl_knee_lf_jnt/pyjgirl_ankle_lf_jnt/pyjgirl_heel_lf_jnt/pyjgirl_ball_lf_jnt/pyjgirl_toes_lf_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_rt_jnt/pyjgirl_knee_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_rt_jnt/pyjgirl_knee_rt_jnt/pyjgirl_ankle_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_rt_jnt/pyjgirl_knee_rt_jnt/pyjgirl_ankle_rt_jnt/pyjgirl_heel_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_rt_jnt/pyjgirl_knee_rt_jnt/pyjgirl_ankle_rt_jnt/pyjgirl_heel_rt_jnt/pyjgirl_ball_rt_jnt
+        weight: 1
+      - path: pyjgirl_root_jnt/pyjgirl_waist_jnt/pyjgirl_hip_rt_jnt/pyjgirl_knee_rt_jnt/pyjgirl_ankle_rt_jnt/pyjgirl_heel_rt_jnt/pyjgirl_ball_rt_jnt/pyjgirl_toes_rt_jnt
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+>>>>>>> 1ca7777bad00c5934a6de54c5cffb1b47a1aa719
     isReadable: 1
   meshes:
     lODScreenPercentages: []

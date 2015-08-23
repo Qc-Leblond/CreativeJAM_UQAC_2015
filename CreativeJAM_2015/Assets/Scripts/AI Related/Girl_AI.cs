@@ -20,6 +20,7 @@ public class Girl_AI : MonoBehaviour {
     AIState currentState;
 
     public State state;
+    public Animator anim;
 
     public bool isCrying = false;
     public bool isStuck = false;
@@ -55,6 +56,7 @@ public class Girl_AI : MonoBehaviour {
         stateDictionary.Add(State.baited, new AIState_Baited(this));
         SwitchState(State.idle);
         fieldOfViewVisual.material.color = noDoubt;
+        anim = GetComponent<Animator>();
     }
 
     void Start() {
@@ -147,31 +149,34 @@ public class AIState_Moving : AIState {
     AI_DestinationPoint destination;
     float desiredRotation;
     Transform girlPos;
-    float startingRotation;
-    bool once;
+    float time;
     public override void Execute() {
         destination = Girl_AI.possibleDestinations.GetRandomPoint(girlAI.currentPos);
         girlAI.currentPos = destination;
         girlAI.girlPathingAI.destination = destination.position;
         desiredRotation = Random.Range(0f, 360f);
         if (girlPos == null) girlPos = girlAI.gameObject.transform;
-        once = true;
+        time = 0;
+        girlAI.anim.SetBool("isMoving", true);
     }
 
     public override void Running() {
         if (!girlAI.girlPathingAI.hasPath || girlAI.girlPathingAI.velocity.sqrMagnitude == 0f) {
-            if (once) {
-                once = false;
-                startingRotation = girlAI.transform.rotation.y;
-            }
             girlAI.transform.rotation = Quaternion.Slerp(girlAI.transform.rotation,
                                                          Quaternion.Euler(new Vector3(0, desiredRotation, 0)),
                                                          Time.deltaTime * girlAI.lookatRotationSpeed);
-            
-            if ((desiredRotation < startingRotation && girlAI.transform.rotation.y <= desiredRotation) 
-                || (desiredRotation > startingRotation && girlAI.transform.rotation.y >= desiredRotation))
+
+            if (time >= 2f) {
                 girlAI.SwitchState(Girl_AI.State.idle);
+            }
+            else {
+                time += Time.deltaTime;
+            }
         }
+    }
+
+    public override void Finish() {
+        girlAI.anim.SetBool("isMoving", false);
     }
 }
 
@@ -182,7 +187,7 @@ public class AIState_Idle : AIState {
     float timeBeforeMove;
     public AIState_Idle(Girl_AI ai) : base(ai) { }
     public override void Execute() {
-        timeBeforeMove = Random.Range(5f, 15f); //In secondes
+        timeBeforeMove = Random.Range(5f, 30f); //In secondes
     }
     public override void Running() {
         timeBeforeMove -= Time.deltaTime;
@@ -201,6 +206,7 @@ public class AIState_Crying : AIState {
         GameManager.instance.AddToScore(1000, girlAI.transform.position, GameManager.ScoreType.crying, false);
         girlAI.isCrying = true;
         GameManager.instance.OnGirlCrying();
+        girlAI.anim.SetTrigger("Crying");
     }
 }
 
@@ -224,6 +230,7 @@ public class AIState_Doubtful : AIState {
         if (playerPos == null) {
             playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        girlAI.anim.SetTrigger("Doubting");
     }
     public override void Running() {
         girlAI.transform.rotation = Quaternion.Slerp(girlAI.transform.rotation,
