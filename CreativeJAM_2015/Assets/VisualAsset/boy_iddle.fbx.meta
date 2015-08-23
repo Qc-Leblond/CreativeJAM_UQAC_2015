@@ -1,0 +1,125 @@
+fileFormatVersion: 2
+guid: b2d81d30bf88a594e890508fe211c7a0
+timeCreated: 1440335274
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: boy_clav_lf_ctrl_grp
+    100002: boy_clav_lf_jnt
+    100004: boy_clav_rt_ctrl_grp
+    100006: boy_clav_rt_jnt
+    100008: boy_elbow_lf_jnt
+    100010: boy_elbow_rt_jnt
+    100012: boy_finger_end_lf_jnt
+    100014: boy_finger_end_rt_jnt
+    100016: boy_finger_lf_ctrl_grp
+    100018: boy_finger_lf_jnt
+    100020: boy_finger_rt_ctrl_grp
+    100022: boy_finger_rt_jnt
+    100024: //RootNode
+    100026: boy_neck_ctrl_grp
+    100028: boy_root_jnt
+    100030: boy_shoulder_lf_jnt
+    100032: boy_shoulder_rt_jnt
+    100034: boy_thumb_end_lf_jnt
+    100036: boy_thumb_end_rt_jnt
+    100038: boy_thumb_lf_ctrl_grp
+    100040: boy_thumb_lf_jnt
+    100042: boy_thumb_rt_ctrl_grp
+    100044: boy_thumb_rt_jnt
+    100046: boy_wrist_lf_jnt
+    100048: boy_wrist_rt_jnt
+    100050: pyjgirl_geo
+    400000: boy_clav_lf_ctrl_grp
+    400002: boy_clav_lf_jnt
+    400004: boy_clav_rt_ctrl_grp
+    400006: boy_clav_rt_jnt
+    400008: boy_elbow_lf_jnt
+    400010: boy_elbow_rt_jnt
+    400012: boy_finger_end_lf_jnt
+    400014: boy_finger_end_rt_jnt
+    400016: boy_finger_lf_ctrl_grp
+    400018: boy_finger_lf_jnt
+    400020: boy_finger_rt_ctrl_grp
+    400022: boy_finger_rt_jnt
+    400024: //RootNode
+    400026: boy_neck_ctrl_grp
+    400028: boy_root_jnt
+    400030: boy_shoulder_lf_jnt
+    400032: boy_shoulder_rt_jnt
+    400034: boy_thumb_end_lf_jnt
+    400036: boy_thumb_end_rt_jnt
+    400038: boy_thumb_lf_ctrl_grp
+    400040: boy_thumb_lf_jnt
+    400042: boy_thumb_rt_ctrl_grp
+    400044: boy_thumb_rt_jnt
+    400046: boy_wrist_lf_jnt
+    400048: boy_wrist_rt_jnt
+    400050: pyjgirl_geo
+    4300000: pyjgirl_geo
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: pyjgirl_geo
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

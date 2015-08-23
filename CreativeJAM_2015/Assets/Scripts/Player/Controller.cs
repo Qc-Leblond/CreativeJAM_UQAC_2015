@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Controller : MonoBehaviour 
 {
-    private bool isAxisInUse;        //Capte si le Dpad est utilisé
+    private bool isAxisInUse,        //Capte si le Dpad est utilisé
+                 isWalking = false;
     public float MaxCam = 20f,       //Angle maximal de la caméra
                  MinCam = -20f,      //Angle minimal de la caméra
                  MoveSpeed = 5f,     //Vitesse de translation
@@ -42,36 +43,47 @@ public class Controller : MonoBehaviour
         transform.Translate(-Vector3.forward * MoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime); //personnage avant-arrière
         transform.Translate(Vector3.right * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime);    //personnage gauche-droite
 
-        //marche coquine lorsque B est appuyé
-        if (Input.GetButtonDown("GirlWalk"))
+        Debug.Log(Input.GetAxisRaw("Horizontal"));
+        Debug.Log(Input.GetAxisRaw("Vertical"));
+        
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            Debug.Log("caa");
+            if(!isWalking && !player.isGirlWalking)
+            {
+                anim.SetBool("FinWalk", false);
+                anim.Play("Walking");
+                isWalking = true;
+            }
+        }
+
+        else
+        {
+            anim.SetBool("FinWalk", true);
+            isWalking = false;
+        }
+            
+        //marche coquine lorsque B est appuyé
+        if (Input.GetButton("GirlWalk"))
+        {
             if (player.ego <= 0)
             {
-                
-                anim.GetComponent<Animation>().Stop();
-                anim.SetBool("GirlWalking", false);
-               
-                //anim.SetTrigger("Walk");
+                anim.SetBool("FinGirlWalk", true);
                 player.isGirlWalking = false;
                 MoveSpeed = 5f;
-            } 
-            else
+            }
+            else if (player.ego > 0 && player.isGirlWalking == false)
             {
-                anim.SetBool("GirlWalking", true);
+                anim.SetBool("FinGirlWalk", false);
+                anim.Play("GirlWalk");
                 player.isGirlWalking = true;
                 MoveSpeed = 2f;
             }
-           
-
-             
         }
 
         //fin de la marche coquine lorsque B est relâché
         if (Input.GetButtonUp("GirlWalk"))
         {
-            anim.SetBool("GirlWalking", false);
-            anim.SetTrigger("Walk");
+            anim.SetBool("FinGirlWalk", true);
             player.isGirlWalking = false;
             MoveSpeed = 5f;
         }
