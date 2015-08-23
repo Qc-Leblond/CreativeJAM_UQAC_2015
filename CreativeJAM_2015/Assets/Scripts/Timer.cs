@@ -25,7 +25,6 @@ public class Timer : MonoBehaviour
         TimeLeft = TimeStart;
         TimerActive = true;
     }
-
     public void TimerStop() {
         TimerActive = false;
     }
