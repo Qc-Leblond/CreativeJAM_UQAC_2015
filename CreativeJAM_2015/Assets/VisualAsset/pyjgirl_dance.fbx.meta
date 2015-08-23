@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ee308b3c454f6074ba66d5baf8f98115
-timeCreated: 1440287633
+guid: 7cc194613deec1e4bbcd11b76cc3bee5
+timeCreated: 1440298652
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -160,18 +160,19 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+<<<<<<< HEAD
     clipAnimations:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 46
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -319,6 +320,9 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
+=======
+    clipAnimations: []
+>>>>>>> f54a32ddaf81b29940e49a60d95584cd2bf3973f
     isReadable: 1
   meshes:
     lODScreenPercentages: []

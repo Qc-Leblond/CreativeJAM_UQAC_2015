@@ -23,7 +23,6 @@ public class Controller : MonoBehaviour
     public GameObject Stereo;
     public GameObject ghostTrap;
     public GameObject Trap;
-    public GameObject ghostPerruque;
     public GameObject Perruque;
     public GameObject ghostBombe;
     public GameObject Bombe;
@@ -135,16 +134,16 @@ public class Controller : MonoBehaviour
             switch (objectSelected)
             {
                 case 0:
-                    inventaire.AddItem(0, 4);
+                    inventaire.AddItem(0, 3);
                     break;
                 case 1:
                     inventaire.AddItem(1, 4);
                     break;
                 case 2:
-                    inventaire.AddItem(2, 4);
+                    inventaire.AddItem(2, 5);
                     break;
                 case 3: //Radio
-                    inventaire.AddItem(3, 4);
+                    inventaire.AddItem(3, 6);
                     break;
             }
         }
@@ -157,7 +156,7 @@ public class Controller : MonoBehaviour
             ghostBombe.SetActive(true);
 
         if (objectSelected == 2 && inventaire.NbrItems[2] > 0)
-            ghostPerruque.SetActive(true);
+            GameManager.instance.AddDoubt(-20);
 
         if (objectSelected == 3 && inventaire.NbrItems[3] > 0)
             ghostStereo.SetActive(true);
@@ -210,7 +209,6 @@ public class Controller : MonoBehaviour
     {
         ghostTrap.SetActive(false);
         ghostBombe.SetActive(false);
-        //ghostPerruque.SetActive(false);
         ghostStereo.SetActive(false);
     }
 }
