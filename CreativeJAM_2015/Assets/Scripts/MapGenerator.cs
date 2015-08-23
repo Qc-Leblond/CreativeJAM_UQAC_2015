@@ -7,7 +7,7 @@ public class MapGenerator : MonoBehaviour {
 	public GameObject [] pieceArray;
     public GameObject Filler;
     public GameObject Garage;
-	public Material[] colorAray;
+	public Color[] colorAray;
     public GameObject ressource;
 	public int maxSizeX;
 	public int maxSizeY;
@@ -33,6 +33,13 @@ public class MapGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	public void SpawnGen() {
+
+        /*colorAray[0] = new Color(0.53f, 0.81f, 0.98f);
+        colorAray[1] = new Color(0.62f, 0.89f, 0.31f);
+        colorAray[2] = new Color(1f, 1f, 0.4f);
+        colorAray[3] = new Color(1f, 0.74f, 0.33f);
+        colorAray[4] = new Color(1f, 0.4f, 0.4f);*/
+
 		corArray = new int[maxSizeX,maxSizeY];
         colorRooms = new int[maxSizeX, maxSizeY];
 		startPosition = Random.Range (0, maxSizeX);
@@ -55,7 +62,7 @@ public class MapGenerator : MonoBehaviour {
 				}
 			}
 
-			if (instancePosition.z < (maxSizeY - 1) * withRoom )
+			if (instancePosition.z < ((maxSizeY - 1) * withRoom))
 			{
                 if (corArray[((int)instancePosition.x) / (int)withRoom, ((int)instancePosition.z + (int)withRoom) / (int)withRoom] < 1)
 				{
@@ -71,7 +78,7 @@ public class MapGenerator : MonoBehaviour {
 				}
 			}
 
-			if (instancePosition.x < (maxSizeX - 1) * withRoom )
+			if (instancePosition.x < ((maxSizeX - 1) * withRoom))
 			{
                 if (corArray[((int)instancePosition.x + (int)withRoom) / (int)withRoom, ((int)instancePosition.z) / (int)withRoom] < 1)
 				{
@@ -81,39 +88,51 @@ public class MapGenerator : MonoBehaviour {
 
 			if (directionDispo.Count < 1)
 			{
-				i = maxRooms;
+                i = maxRooms;
 			}
-			else
-			{
-				randomIndexList = Random.Range (0, directionDispo.Count);
-				caseSwitch = directionDispo[randomIndexList];
+            else
+            {
+                randomIndexList = Random.Range(0, directionDispo.Count);
+                caseSwitch = directionDispo[randomIndexList];
 
-				switch (caseSwitch)
-				{
-				case 'u':
-					instancePosition.z = instancePosition.z + withRoom;
-					break;
-				case 'r':
-					instancePosition.x = instancePosition.x + withRoom;
-					break;
-				case 'd':
-					instancePosition.z = instancePosition.z - withRoom;
-					break;
-				case 'l':
-					instancePosition.x = instancePosition.x - withRoom;
-					break;
-				default:
-					Debug.Log("Error");
-					break;
-				}
+                switch (caseSwitch)
+                {
+                    case 'u':
+                        instancePosition.z = instancePosition.z + withRoom;
+                        break;
+                    case 'r':
+                        instancePosition.x = instancePosition.x + withRoom;
+                        break;
+                    case 'd':
+                        instancePosition.z = instancePosition.z - withRoom;
+                        break;
+                    case 'l':
+                        instancePosition.x = instancePosition.x - withRoom;
+                        break;
+                    default:
+                        Debug.Log("Error");
+                        break;
+                }
 
-				GameObject maPiece = Instantiate (pieceArray [randomRoom], instancePosition, Quaternion.identity) as GameObject;
+                GameObject maPiece = Instantiate(pieceArray[randomRoom], instancePosition, Quaternion.identity) as GameObject;
+
+                int randomNumberColor = Random.Range(0, 5);
+                foreach (Transform child in maPiece.transform)
+                {
+                    if (child.CompareTag("Wall")) 
+                    {
+                        child.GetComponent<MeshRenderer>().material.color = colorAray[randomNumberColor];
+                    } 
+                } 
+               
+                randomRoom = Random.Range(0, pieceArray.Length);
                 int colorRandom = Random.Range(0, pieceArray.Length);
-				corArray [(int)(instancePosition.x / withRoom), (int)(instancePosition.z / withRoom)] = 1;
+                corArray[(int)(instancePosition.x / withRoom), (int)(instancePosition.z / withRoom)] = 1;
                 colorRooms[(int)(instancePosition.x / withRoom), (int)(instancePosition.z / withRoom)] = colorRandom;
                 //set la color
-				directionDispo.Clear();
-			}
+                directionDispo.Clear();
+            }
+			
 		}
 
         spawns = GameObject.FindGameObjectsWithTag("spwannerRessource");
@@ -125,9 +144,9 @@ public class MapGenerator : MonoBehaviour {
             spawnUneRessource();
         }
 
+        GameObject monFiller;
         for (int j = 0; j < maxSizeX; j++)
         {
-            GameObject monFiller;
             for (int k = 0; k < maxSizeY; k++)
             {
                 if (corArray[j, k] < 1)
@@ -138,38 +157,49 @@ public class MapGenerator : MonoBehaviour {
                     monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
 
                     setColorFiller(monFiller, j, k);
+                }
+           
+                if (k == 0)
+                {
+                    fillerPosition.x = (withRoom * j);
+                    fillerPosition.z = 0 - withRoom;
+                    if (fillerPosition.x != garagePosition.x || fillerPosition.z != garagePosition.z)
+                    {
+                        monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
 
-                    fillerPosition.x = - withRoom;
-                    fillerPosition.z = (withRoom * j);
+                        setColorFiller(monFiller, j, k);
+                    }
+                }
 
-                    monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
-
-                    setColorFiller(monFiller, j, k);
-
-                    fillerPosition.x = withRoom * maxSizeY;
-                    fillerPosition.z = (withRoom * j);
+                if (k == maxSizeY - 1)
+                {
+                    fillerPosition.x = (withRoom * j);
+                    fillerPosition.z = maxSizeY * withRoom;
 
                     monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
 
                     setColorFiller(monFiller, j, k);
                 }
-            }
 
-            
-            fillerPosition.x = (withRoom * j);
-            fillerPosition.z = - withRoom;
+                if (j == 0)
+                {
+                    fillerPosition.x = 0 - withRoom;
+                    fillerPosition.z = withRoom * k;
 
-            if (fillerPosition.x != garagePosition.x) {
-                monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+                    monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
 
-                setColorFiller(monFiller, j, (int)fillerPosition.z);
+                    setColorFiller(monFiller, j, k);
+                }
 
-                fillerPosition.x = (withRoom * j);
-                fillerPosition.z = withRoom * maxSizeY;
+                if (j == maxSizeX - 1)
+                {
+                    fillerPosition.x = maxSizeX * withRoom;
+                    fillerPosition.z = k * withRoom;
 
-                monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
+                    monFiller = Instantiate(Filler, fillerPosition, Quaternion.identity) as GameObject;
 
-                setColorFiller(monFiller, j, (int)(fillerPosition.z / withRoom));
+                    setColorFiller(monFiller, j, k);
+                }
             }
         }
 	}

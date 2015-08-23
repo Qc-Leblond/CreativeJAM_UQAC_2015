@@ -15,11 +15,11 @@ public class Ressource : MonoBehaviour {
 	void Update () {
         transform.Rotate(new Vector3(0, speedRotation, 0) * Time.deltaTime);
         
-        if(transform.position.y > 0.6f)
+        if(transform.position.y > 1.6f)
         {
             goUp = false;
         }
-        else if(transform.position.y < 0.4f)
+        else if(transform.position.y < 1.4f)
         {
             goUp = true;
         }
