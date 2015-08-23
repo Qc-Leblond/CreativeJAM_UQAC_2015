@@ -42,9 +42,6 @@ public class Controller : MonoBehaviour
 
         transform.Translate(-Vector3.forward * MoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime); //personnage avant-arrière
         transform.Translate(Vector3.right * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime);    //personnage gauche-droite
-
-        Debug.Log(Input.GetAxisRaw("Horizontal"));
-        Debug.Log(Input.GetAxisRaw("Vertical"));
         
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
