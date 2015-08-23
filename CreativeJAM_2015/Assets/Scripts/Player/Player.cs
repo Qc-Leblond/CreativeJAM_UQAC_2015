@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
         {
             //On doit descendre l'ego du joueur
             ego = ego - egoDownSpeed;//Valeur set dans l'interface unity
-            Debug.Log(ego);
+            //Debug.Log(ego);
             uiManager.setEgoSliderValue(ego);
             //On verifie si l'ego est = 0
             if (ego <= 0)

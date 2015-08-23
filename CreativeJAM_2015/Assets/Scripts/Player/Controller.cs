@@ -10,12 +10,13 @@ public class Controller : MonoBehaviour
                  TurnSpeed = 5f;     //Vitesse de rotation
     private float RotationX,         //Rotation du joueur sur l'axe X
                   RotationY = 0f;    //Rotation de la caméra sur l'axe Y
-    private int NbrObjet = 4,        //Nombre d'objets (VALEUR TEMPORAIRE)
+    private int NbrObjet = 3,        //Nombre d'objets (VALEUR TEMPORAIRE)
                 objectSelected = 0;  //Objet sélectioné 
     public GameObject Camera;        //Caméra attachée au joueur
     private Player player;           //Script vers Player
     private Rigidbody rigidBody;
     private Inventaire inventaire;
+    private Inventory inventory;
     
     void Awake()
     {
@@ -24,6 +25,7 @@ public class Controller : MonoBehaviour
         isAxisInUse = false;
         rigidBody = GetComponent<Rigidbody>();
         inventaire = GetComponent<Inventaire>();
+        inventory = GetComponent<Inventory>();
     }
 
     void Update ()
@@ -57,12 +59,14 @@ public class Controller : MonoBehaviour
         {
             isAxisInUse = true;
             objectSelected++;
+            inventory.changeInventoryIndex(1);
         }
 
         if (Input.GetAxisRaw("SelectTrigger") == 1 && objectSelected > 0 && !isAxisInUse)
         {
             isAxisInUse = true;
             objectSelected--;
+            inventory.changeInventoryIndex(-1);
         }
 
         if (Input.GetAxis("SelectTrigger") < 1 && Input.GetAxis("SelectTrigger") > -1)
@@ -70,11 +74,18 @@ public class Controller : MonoBehaviour
 
         //Sélection des objects par Q et E
         if (Input.GetKeyDown(KeyCode.Q) && objectSelected > 0)
+        {
             objectSelected--;
+            inventory.changeInventoryIndex(-1);
+        }
+            
 
         if (Input.GetKeyDown(KeyCode.E) && objectSelected < NbrObjet)
+        {
             objectSelected++;
-
+            inventory.changeInventoryIndex(1);
+        }
+            
         //Input pour crafter un item
         if (Input.GetButtonDown("CraftItem"))
         {

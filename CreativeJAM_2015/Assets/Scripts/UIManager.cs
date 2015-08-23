@@ -25,5 +25,6 @@ public class UIManager : MonoBehaviour {
     public void setEgoSliderValue(float value)
     {
         egoSlider.value = value;
+        Debug.Log(value);
     }
 }
