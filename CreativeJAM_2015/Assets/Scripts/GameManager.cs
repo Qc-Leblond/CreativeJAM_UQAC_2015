@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour {
 
     #region Time Related
 
-    private GameObject girl = Resources.Load("Girl") as GameObject;
+    public GameObject girl;
 
     public enum GameResult {
         won,
@@ -140,8 +140,9 @@ public class GameManager : MonoBehaviour {
 
     public void OnGameStart() {
         timer.TimerStart();
-        playerGO.transform.position = mapGenerator.garagePosition;
+        playerGO.transform.position = mapGenerator.garagePosition;//Spawn Player
         currentNumberOfGirl = numberOfGirlSpawned;
+        //Spawn Girl
         for (int i = 0; i < numberOfGirlSpawned; i++) {
             Instantiate(girl);
         }
@@ -217,7 +218,7 @@ public class GameManager : MonoBehaviour {
     #region Score
 
     public int score { get; private set; }
-    private GameObject scoreText = ((GameObject)Resources.Load("Score"));
+    public GameObject scoreText;
     public int scoreDoubt = 0;
     public int scoreTime = 0;
     public int scoreCrying = 0;
