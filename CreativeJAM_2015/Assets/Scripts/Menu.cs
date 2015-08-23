@@ -15,11 +15,9 @@ public class Menu : MonoBehaviour
         {
             if (GUI.Button(new Rect(Screen.width / 2, 50, 200, 50), "Jouer", StyleName))
                 //Application.LoadLevel("");
-            if (GUI.Button(new Rect(Screen.width / 2, 100, 350, 50), "Contrôles", StyleName))
-                transform.position = new Vector3(0, 8, -11);
-            if (GUI.Button(new Rect(Screen.width / 2, 150, 350, 50), "Instructions", StyleName))
+            if (GUI.Button(new Rect(Screen.width / 2, 100, 350, 50), "Instructions", StyleName))
                 transform.position = new Vector3(0, -8, -11);
-            if (GUI.Button(new Rect(Screen.width / 2, 200, 260, 50), "Quitter", StyleName))
+            if (GUI.Button(new Rect(Screen.width / 2, 150, 260, 50), "Quitter", StyleName))
                 Application.Quit();
         }
         else if (transform.position.y == 8)
