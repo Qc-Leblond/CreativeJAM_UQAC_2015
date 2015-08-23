@@ -2,12 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour {
-
-    //BOOL JUSTE POUR TESTES UNE FONCTION
-    public bool tester = false;
-
-
+public class Inventory : MonoBehaviour 
+{
     public int nbrItem1;
     public int nbrItem2;
     public int nbrItem3;
@@ -46,14 +42,10 @@ public class Inventory : MonoBehaviour {
 
     void Update()
     {
-        if (tester == true)
-        {
-            tester = false;
-            changeInventoryIndex(1);
-        }
+ 
     }
 
-    void changeInventoryIndex(int value)
+    public void changeInventoryIndex(int value)
     {
         indexObjectSelected = indexObjectSelected + value;
         
@@ -74,7 +66,6 @@ public class Inventory : MonoBehaviour {
         if(CraftingActive.gameObject.activeSelf)
         {
             changeColorAlphaAndBtn(panelCraft, btnX, Craft, craftTable);
-            Debug.Log("allo");
 
         }
         
@@ -110,6 +101,4 @@ public class Inventory : MonoBehaviour {
             }
         }
     }
-
-
 }
