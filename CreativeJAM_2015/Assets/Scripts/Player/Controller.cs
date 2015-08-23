@@ -10,16 +10,20 @@ public class Controller : MonoBehaviour
                  TurnSpeed = 5f;     //Vitesse de rotation
     private float RotationX,         //Rotation du joueur sur l'axe X
                   RotationY = 0f;    //Rotation de la caméra sur l'axe Y
-    private int NbrObjet = 6,        //Nombre d'objets (VALEUR TEMPORAIRE)
+    private int NbrObjet = 4,        //Nombre d'objets (VALEUR TEMPORAIRE)
                 objectSelected = 0;  //Objet sélectioné 
     public GameObject Camera;        //Caméra attachée au joueur
     private Player player;           //Script vers Player
+    private Rigidbody rigidBody;
+    private Inventaire inventaire;
     
     void Awake()
     {
         Cursor.visible = false; 
         player = this.GetComponent<Player>();
         isAxisInUse = false;
+        rigidBody = GetComponent<Rigidbody>();
+        inventaire = GetComponent<Inventaire>();
     }
 
     void Update ()
@@ -74,13 +78,48 @@ public class Controller : MonoBehaviour
         //Input pour crafter un item
         if (Input.GetButtonDown("CraftItem"))
         {
-            //Do something fun :D
+            switch (objectSelected)
+            {
+                case 0:
+                    inventaire.AddItem(0, 4);
+                    break;
+                case 1:
+                    inventaire.AddItem(1, 4);
+                    break;
+                case 2:
+                    inventaire.AddItem(2, 4);
+                    break;
+                case 3:
+                    inventaire.AddItem(3, 4);
+                    break;
+            }
         }
 
         //Input pour utiliser un item
         if (Input.GetButtonDown("UseItem"))
         {
-            //Do something fun :D
+            switch(objectSelected)
+            {
+                case 0:
+                    inventaire.RemoveItem(0);
+                    break;
+                case 1:
+                    inventaire.RemoveItem(1);
+                    break;
+                case 2:
+                    inventaire.RemoveItem(2);
+                    break;
+                case 3:
+                    inventaire.RemoveItem(3);
+                    break;
+            }
         }
 	}
+
+    void OnCollisionEnter(Collision collision)
+    {
+        rigidBody.isKinematic = true;
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.isKinematic = false;
+    }
 }
