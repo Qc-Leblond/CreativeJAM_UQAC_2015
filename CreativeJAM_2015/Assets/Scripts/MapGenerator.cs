@@ -219,8 +219,6 @@ public class MapGenerator : MonoBehaviour {
 
             if (child.CompareTag("WallL"))
             {
-                Debug.Log(x);
-                Debug.Log(y);
                 if (x > 0 && y >= 0 && y <= maxSizeY - 1)
                 {
                     child.GetComponent<MeshRenderer>().material.color = colorRooms[x - 1, y];

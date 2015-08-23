@@ -64,14 +64,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void update() {
-        if (doubt >= maxDoubt) {
-            OnGameEnd(GameResult.lost);
+    void Update() {
+        if (currentScene == Scene.main) {
+            if (doubt >= maxDoubt) {
+                Debug.Log("Lost");
+                OnGameEnd(GameResult.lost);
+            }
+            if (currentNumberOfGirl <= 0) {
+                OnGameEnd(GameResult.won);
+            }
+            HandleGirlWalking();
         }
-        if (currentNumberOfGirl <= 0) {
-            OnGameEnd(GameResult.won);
-        }
-        HandleGirlWalking();
     }
 
     void HandleGirlWalking() {
@@ -86,8 +89,21 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void AddDoubt(float mod) {
+        if (doubt <= maxDoubt)
+            doubt += mod;
+        else
+            doubt = maxDoubt;
+    }
+
     public void OnGirlCrying(){
         currentNumberOfGirl--;
+        returnGirlRamaining();
+    }
+
+    public void returnGirlRamaining()
+    {
+        playerScript.uiManager.setGirlRamaining(currentNumberOfGirl);
     }
 
     #region On Level Load
@@ -121,11 +137,11 @@ public class GameManager : MonoBehaviour {
 
             case Scene.main:
                 Application.LoadLevel("Main");
-                OnMainLoad();
                 mapGenerator.SpawnGen();
+                OnMainLoad();
                 break;
             case Scene.recapEnd:
-                Application.LoadLevel("RecapEnd");
+                Application.LoadLevel("Recap");
                 break;
         }
     }
@@ -154,7 +170,7 @@ public class GameManager : MonoBehaviour {
 
     public void OnGameEnd(GameResult result) {
         timer.TimerStop();
-        AddToScore(Mathf.CeilToInt(timer.TimeLeft * 10), Vector3.zero, ScoreType.time, false);
+        if (result == GameResult.won) AddToScore(Mathf.CeilToInt(timer.TimeLeft * 10), Vector3.zero, ScoreType.time, false);
         AddToScore(Mathf.CeilToInt(-doubt * 5), Vector3.zero, ScoreType.doubt, false);
         StartCoroutine(OnGameEndCoroutine());
     }
