@@ -36,7 +36,7 @@ public class Ressource : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Girl")
+        if (other.tag == "Player")
         {
             if (GameManager.instance.mapGenerator.listSpawnnerTemp.Contains(gameObject))
             {
@@ -44,6 +44,9 @@ public class Ressource : MonoBehaviour {
             }
             GameManager.instance.mapGenerator.spawnUneRessource();
             GameManager.instance.mapGenerator.listSpawnnerTemp.Add(gameObject);
+
+            other.GetComponent<Inventaire>().Junk++;
+            Destroy(gameObject);
         }
     }
 }
