@@ -64,14 +64,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void update() {
-        if (doubt >= maxDoubt) {
-            OnGameEnd(GameResult.lost);
+    void Update() {
+        if (currentScene == Scene.main) {
+            if (doubt >= maxDoubt) {
+                Debug.Log("Lost");
+                OnGameEnd(GameResult.lost);
+            }
+            if (currentNumberOfGirl <= 0) {
+                OnGameEnd(GameResult.won);
+            }
+            HandleGirlWalking();
         }
-        if (currentNumberOfGirl <= 0) {
-            OnGameEnd(GameResult.won);
-        }
-        HandleGirlWalking();
     }
 
     void HandleGirlWalking() {
@@ -84,6 +87,13 @@ public class GameManager : MonoBehaviour {
                 Debug.Log("TU ES UNE FILLE !!!");
             }
         }
+    }
+
+    public void AddDoubt(float mod) {
+        if (doubt <= maxDoubt)
+            doubt += mod;
+        else
+            doubt = maxDoubt;
     }
 
     public void OnGirlCrying(){
@@ -115,9 +125,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public void SwitchScene(Scene scene) {
+        currentScene = scene;
         switch (scene) {
             case Scene.menu:
-                Application.LoadLevel("Menu");
+                Application.LoadLevel("Intro");
                 break;
 
             case Scene.cinematicIntro:
@@ -126,11 +137,11 @@ public class GameManager : MonoBehaviour {
 
             case Scene.main:
                 Application.LoadLevel("Main");
-                OnMainLoad();
                 mapGenerator.SpawnGen();
+                OnMainLoad();
                 break;
             case Scene.recapEnd:
-                Application.LoadLevel("RecapEnd");
+                Application.LoadLevel("Recap");
                 break;
         }
     }
@@ -159,7 +170,7 @@ public class GameManager : MonoBehaviour {
 
     public void OnGameEnd(GameResult result) {
         timer.TimerStop();
-        AddToScore(Mathf.CeilToInt(timer.TimeLeft * 10), Vector3.zero, ScoreType.time, false);
+        if (result == GameResult.won) AddToScore(Mathf.CeilToInt(timer.TimeLeft * 10), Vector3.zero, ScoreType.time, false);
         AddToScore(Mathf.CeilToInt(-doubt * 5), Vector3.zero, ScoreType.doubt, false);
         StartCoroutine(OnGameEndCoroutine());
     }
@@ -179,32 +190,15 @@ public class GameManager : MonoBehaviour {
     public float finalHeight;
     public float risingSpeed;
     public float cinematicCameraAnimTime;
-    private float cameraRotation;
 
     private void StartCinematic() {
         cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        cinematicCamera.transform.localPosition = new Vector3(0, -0.2f, -1.6f);
-        playerGO.transform.position = new Vector3(0, 0.2f, 17f);
-        cameraRotation = 0;
         StartCoroutine(CinematicAnim());
     }
 
     IEnumerator CinematicAnim() {
-        Camera main = Camera.main;
-        Camera.main.enabled = false;
-        cinematicCamera.enabled = true;
-        while (!MoveCamera(0.25f, -0.15f)) {
-            yield return new WaitForEndOfFrame();
-        }
-        GameObject.FindGameObjectWithTag("IntroAnim").GetComponent<Animation>().Play();
+        GameObject.FindGameObjectWithTag("IntroAnim").GetComponent<Animator>().SetBool("Start", true);
         yield return new WaitForSeconds(DelayBetween);
-        yield return new WaitForSeconds(0.5f);
-        cinematicCamera.transform.localPosition = playerGO.transform.position + new Vector3(0, -3f, -3f);
-        cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        while (MoveCamera(-2f, 7f)) {
-            yield return new WaitForEndOfFrame();
-        }
-        yield return new WaitForSeconds(0.5f);
         SwitchScene(Scene.main);
     }
 

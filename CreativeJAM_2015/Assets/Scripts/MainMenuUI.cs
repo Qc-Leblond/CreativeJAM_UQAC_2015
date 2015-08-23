@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour {
 
+    public RectTransform panel;
     public GameObject mainPanel;
     public GameObject creditsPanel;
     public AnimationCurve animCurve;
@@ -43,6 +44,14 @@ public class MainMenuUI : MonoBehaviour {
     }
 
     IEnumerator RemovePanel() {
-        yield return new WaitForEndOfFrame();
+        float time = 0;
+        while (time < 2.5f) {
+            time += Time.deltaTime;
+            float current = animCurve.Evaluate(time);
+            panel.offsetMin = new Vector2(-current, -current/2);
+            panel.offsetMax = new Vector2(-current, -current/2);
+            yield return new WaitForEndOfFrame();
+        }
+        GameManager.instance.SwitchScene(GameManager.Scene.cinematicIntro);
     }
 }
