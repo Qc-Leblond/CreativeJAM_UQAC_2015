@@ -7,7 +7,12 @@ public class Inventaire : MonoBehaviour
     public int Junk = 4;
     public int[] NbrItems = new int[4];
     public GameObject[] Nombres = new GameObject[5];
+    private Animator anim;
 
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 	void Update () 
     {
 	    for(int i = 0; i < 4; i++)
@@ -31,6 +36,7 @@ public class Inventaire : MonoBehaviour
     {
         if(NbrItems[Number] > 0)
         {
+            anim.SetTrigger("DropItem");
             NbrItems[Number]--;
         }
     }   
