@@ -177,8 +177,8 @@ public class Controller : MonoBehaviour
                     if (inventaire.NbrItems[1] > 0)
                         Instantiate(Bombe, ghostBombe.transform.position, Quaternion.identity);
                     
-                    inventaire.RemoveItem(1);
                     ghostBombe.SetActive(false);
+                    inventaire.RemoveItem(1);
                     break;
                 case 2:
                     if (inventaire.NbrItems[2] > 0)
