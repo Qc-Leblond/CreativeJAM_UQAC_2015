@@ -99,6 +99,12 @@ public class GameManager : MonoBehaviour {
 
     public void OnGirlCrying(){
         currentNumberOfGirl--;
+        returnGirlRamaining();
+    }
+
+    public void returnGirlRamaining()
+    {
+        playerScript.uiManager.setGirlRamaining(currentNumberOfGirl);
     }
 
     #region On Level Load
