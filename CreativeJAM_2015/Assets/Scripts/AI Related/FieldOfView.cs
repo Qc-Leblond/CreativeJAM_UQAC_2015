@@ -20,9 +20,11 @@ public class FieldOfView : MonoBehaviour {
             RaycastHit hit;
             Vector3 girlPos = girlAI.GetGirlPos();
             Physics.Raycast(girlPos, player.position -girlPos, out hit);
-            if (hit.transform.root.tag == "Player" && !GameManager.instance.playerScript.isGirlWalking) {
-                girlAI.SwitchState(Girl_AI.State.doubtful);
-                doubtful = true;
+            if (hit.transform.tag == "Player" && !GameManager.instance.playerScript.isGirlWalking) {
+                if (!doubtful) {
+                    girlAI.SwitchState(Girl_AI.State.doubtful);
+                    doubtful = true;
+                }
             }
             else {
                 girlAI.GoBackToPreviousState();
