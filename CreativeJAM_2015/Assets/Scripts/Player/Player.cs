@@ -16,12 +16,9 @@ public class Player : MonoBehaviour {
         public int nbrJunk;
 
         //Variable pour set le l'ego qu'on perd quand on girlWalk (on gagane de l'ego si on fait un tour)
-        public float egoDownSpeed;
+        public float egoDownSpeed;  
 
-        //Variable qui contient le uimanager
-        public GameObject GoUiManager;
-
-        private UIManager uiManager;
+        public UIManager uiManager;
     //********************************************************************************************//
   
 
@@ -33,11 +30,6 @@ public class Player : MonoBehaviour {
         nbrJunk = 0;  //Valeur temporaire
         ego = 100f; //Valeur temporaire
 
-    }
-
-    void Start()
-    {
-        uiManager = GoUiManager.GetComponent<UIManager>();
     }
 
     void Update()
