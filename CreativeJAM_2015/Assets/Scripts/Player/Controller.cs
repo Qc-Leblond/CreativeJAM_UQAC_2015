@@ -19,6 +19,14 @@ public class Controller : MonoBehaviour
     private Inventaire inventaire;
     private Inventory inventory;
     private Animator anim;
+    public GameObject ghostStereo;
+    public GameObject Stereo;
+    public GameObject ghostTrap;
+    public GameObject Trap;
+    public GameObject ghostPerruque;
+    public GameObject Perruque;
+    public GameObject ghostBombe;
+    public GameObject Bombe;
     
     void Awake()
     {
@@ -131,28 +139,57 @@ public class Controller : MonoBehaviour
                 case 2:
                     inventaire.AddItem(2, 4);
                     break;
-                case 3:
+                case 3: //Radio
                     inventaire.AddItem(3, 4);
                     break;
             }
         }
 
         //Input pour utiliser un item
+        if (objectSelected == 0 && inventaire.NbrItems[0] > 0)
+            ghostTrap.SetActive(true);
+
+        if (objectSelected == 1 && inventaire.NbrItems[1] > 0)
+            ghostBombe.SetActive(true);
+
+        if (objectSelected == 2 && inventaire.NbrItems[2] > 0)
+            ghostPerruque.SetActive(true);
+
+        if (objectSelected == 3 && inventaire.NbrItems[3] > 0)
+            ghostStereo.SetActive(true);
+
+
         if (Input.GetButtonDown("UseItem"))
         {
             switch(objectSelected)
             {
                 case 0:
+                    if (inventaire.NbrItems[0] > 0)
+                        Instantiate(Trap, ghostTrap.transform.position, Quaternion.identity);
+                    
                     inventaire.RemoveItem(0);
+                    ghostTrap.SetActive(false);
                     break;
                 case 1:
+                    if (inventaire.NbrItems[1] > 0)
+                        Instantiate(Bombe, ghostBombe.transform.position, Quaternion.identity);
+                    
+                    ghostBombe.SetActive(false);
                     inventaire.RemoveItem(1);
                     break;
                 case 2:
+                    if (inventaire.NbrItems[2] > 0)
+                        Instantiate(Perruque, ghostPerruque.transform.position, Quaternion.identity);
+                    
                     inventaire.RemoveItem(2);
+                    ghostPerruque.SetActive(false);
                     break;
                 case 3:
+                    if (inventaire.NbrItems[3] > 0)
+                        Instantiate(Stereo, ghostStereo.transform.position, Quaternion.identity);
+                    
                     inventaire.RemoveItem(3);
+                    ghostStereo.SetActive(false);
                     break;
             }
         }
