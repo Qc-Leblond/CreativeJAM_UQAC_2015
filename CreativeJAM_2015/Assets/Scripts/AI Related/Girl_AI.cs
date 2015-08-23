@@ -108,6 +108,7 @@ public class Girl_AI : MonoBehaviour {
     }
 
     public void GoBackToPreviousState() {
+        currentState.Finish();
         AIState temp = currentState;
         currentState = previousState;
         previousState = temp;
@@ -146,20 +147,29 @@ public class AIState_Moving : AIState {
     AI_DestinationPoint destination;
     float desiredRotation;
     Transform girlPos;
+    float startingRotation;
+    bool once;
     public override void Execute() {
         destination = Girl_AI.possibleDestinations.GetRandomPoint(girlAI.currentPos);
         girlAI.currentPos = destination;
         girlAI.girlPathingAI.destination = destination.position;
         desiredRotation = Random.Range(0f, 360f);
         if (girlPos == null) girlPos = girlAI.gameObject.transform;
+        once = true;
     }
 
     public override void Running() {
         if (!girlAI.girlPathingAI.hasPath || girlAI.girlPathingAI.velocity.sqrMagnitude == 0f) {
+            if (once) {
+                once = false;
+                startingRotation = girlAI.transform.rotation.y;
+            }
             girlAI.transform.rotation = Quaternion.Slerp(girlAI.transform.rotation,
                                                          Quaternion.Euler(new Vector3(0, desiredRotation, 0)),
                                                          Time.deltaTime * girlAI.lookatRotationSpeed);
-            if (girlAI.transform.rotation.y == desiredRotation)
+            
+            if ((desiredRotation < startingRotation && girlAI.transform.rotation.y <= desiredRotation) 
+                || (desiredRotation > startingRotation && girlAI.transform.rotation.y >= desiredRotation))
                 girlAI.SwitchState(Girl_AI.State.idle);
         }
     }
@@ -172,7 +182,7 @@ public class AIState_Idle : AIState {
     float timeBeforeMove;
     public AIState_Idle(Girl_AI ai) : base(ai) { }
     public override void Execute() {
-        timeBeforeMove = Random.Range(5f, 30f); //In secondes
+        timeBeforeMove = Random.Range(5f, 15f); //In secondes
     }
     public override void Running() {
         timeBeforeMove -= Time.deltaTime;
@@ -188,7 +198,9 @@ public class AIState_Idle : AIState {
 public class AIState_Crying : AIState {
     public AIState_Crying(Girl_AI ai) : base(ai) {  }
     public override void Execute() {
+        GameManager.instance.AddToScore(1000, girlAI.transform.position, GameManager.ScoreType.crying, false);
         girlAI.isCrying = true;
+        GameManager.instance.OnGirlCrying();
     }
 }
 

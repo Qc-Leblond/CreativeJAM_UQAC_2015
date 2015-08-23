@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Controller : MonoBehaviour 
 {
-    private bool isAxisInUse;        //Capte si le Dpad est utilisé
+    private bool isAxisInUse,        //Capte si le Dpad est utilisé
+                 isWalking = false;
     public float MaxCam = 20f,       //Angle maximal de la caméra
                  MinCam = -20f,      //Angle minimal de la caméra
                  MoveSpeed = 5f,     //Vitesse de translation
@@ -18,6 +19,14 @@ public class Controller : MonoBehaviour
     private Inventaire inventaire;
     private Inventory inventory;
     private Animator anim;
+    public GameObject ghostStereo;
+    public GameObject Stereo;
+    public GameObject ghostTrap;
+    public GameObject Trap;
+    public GameObject ghostPerruque;
+    public GameObject Perruque;
+    public GameObject ghostBombe;
+    public GameObject Bombe;
     
     void Awake()
     {
@@ -42,23 +51,38 @@ public class Controller : MonoBehaviour
         transform.Translate(-Vector3.forward * MoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime); //personnage avant-arrière
         transform.Translate(Vector3.right * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime);    //personnage gauche-droite
 
-        //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) 
-           // anim.SetBool("Walk", true);
+        Debug.Log(Input.GetAxisRaw("Horizontal"));
+        Debug.Log(Input.GetAxisRaw("Vertical"));
+        
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            if(!isWalking && !player.isGirlWalking)
+            {
+                anim.SetBool("FinWalk", false);
+                anim.Play("Walking");
+                isWalking = true;
+            }
+        }
 
+        else
+        {
+            anim.SetBool("FinWalk", true);
+            isWalking = false;
+        }
+            
         //marche coquine lorsque B est appuyé
-        if (Input.GetButtonDown("GirlWalk"))
+        if (Input.GetButton("GirlWalk"))
         {
             if (player.ego <= 0)
             {
-                //anim.GetComponent<Animation>().Stop();
-                anim.SetBool("GirlWalk", false);;
+                anim.SetBool("FinGirlWalk", true);
                 player.isGirlWalking = false;
                 MoveSpeed = 5f;
-            } 
-            else
+            }
+            else if (player.ego > 0 && player.isGirlWalking == false)
             {
-                anim.SetBool("GirlWalk", true);
-                anim.SetBool("Walk", false);
+                anim.SetBool("FinGirlWalk", false);
+                anim.Play("GirlWalk");
                 player.isGirlWalking = true;
                 MoveSpeed = 2f;
             }
@@ -67,7 +91,7 @@ public class Controller : MonoBehaviour
         //fin de la marche coquine lorsque B est relâché
         if (Input.GetButtonUp("GirlWalk"))
         {
-            anim.SetBool("GirlWalk", false);
+            anim.SetBool("FinGirlWalk", true);
             player.isGirlWalking = false;
             MoveSpeed = 5f;
         }
@@ -118,28 +142,57 @@ public class Controller : MonoBehaviour
                 case 2:
                     inventaire.AddItem(2, 4);
                     break;
-                case 3:
+                case 3: //Radio
                     inventaire.AddItem(3, 4);
                     break;
             }
         }
 
         //Input pour utiliser un item
+        if (objectSelected == 0 && inventaire.NbrItems[0] > 0)
+            ghostTrap.SetActive(true);
+
+        if (objectSelected == 1 && inventaire.NbrItems[1] > 0)
+            ghostBombe.SetActive(true);
+
+        if (objectSelected == 2 && inventaire.NbrItems[2] > 0)
+            ghostPerruque.SetActive(true);
+
+        if (objectSelected == 3 && inventaire.NbrItems[3] > 0)
+            ghostStereo.SetActive(true);
+
+
         if (Input.GetButtonDown("UseItem"))
         {
             switch(objectSelected)
             {
                 case 0:
+                    if (inventaire.NbrItems[0] > 0)
+                        Instantiate(Trap, ghostTrap.transform.position, Quaternion.identity);
+                    
                     inventaire.RemoveItem(0);
+                    ghostTrap.SetActive(false);
                     break;
                 case 1:
+                    if (inventaire.NbrItems[1] > 0)
+                        Instantiate(Bombe, ghostBombe.transform.position, Quaternion.identity);
+                    
                     inventaire.RemoveItem(1);
+                    ghostBombe.SetActive(false);
                     break;
                 case 2:
+                    if (inventaire.NbrItems[2] > 0)
+                        Instantiate(Perruque, ghostPerruque.transform.position, Quaternion.identity);
+                    
                     inventaire.RemoveItem(2);
+                    ghostPerruque.SetActive(false);
                     break;
                 case 3:
+                    if (inventaire.NbrItems[3] > 0)
+                        Instantiate(Stereo, ghostStereo.transform.position, Quaternion.identity);
+                    
                     inventaire.RemoveItem(3);
+                    ghostStereo.SetActive(false);
                     break;
             }
         }
