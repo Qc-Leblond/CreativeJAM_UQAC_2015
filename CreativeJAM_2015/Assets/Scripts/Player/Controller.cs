@@ -182,10 +182,7 @@ public class Controller : MonoBehaviour
                     break;
                 case 2:
                     if (inventaire.NbrItems[2] > 0)
-                        Instantiate(Perruque, ghostPerruque.transform.position, Quaternion.identity);
-                    
-                    inventaire.RemoveItem(2);
-                    ghostPerruque.SetActive(false);
+                        inventaire.RemoveItem(2);
                     break;
                 case 3:
                     if (inventaire.NbrItems[3] > 0)
