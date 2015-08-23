@@ -148,6 +148,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void OnGameEnd(GameResult result) {
+        timer.TimerStop();
         StartCoroutine(OnGameEndCoroutine());
     }
 
