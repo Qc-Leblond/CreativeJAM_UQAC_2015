@@ -109,9 +109,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public void SwitchScene(Scene scene) {
+        currentScene = scene;
         switch (scene) {
             case Scene.menu:
-                Application.LoadLevel("Menu");
+                Application.LoadLevel("Intro");
                 break;
 
             case Scene.cinematicIntro:
@@ -173,32 +174,15 @@ public class GameManager : MonoBehaviour {
     public float finalHeight;
     public float risingSpeed;
     public float cinematicCameraAnimTime;
-    private float cameraRotation;
 
     private void StartCinematic() {
         cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        cinematicCamera.transform.localPosition = new Vector3(0, -0.2f, -1.6f);
-        playerGO.transform.position = new Vector3(0, 0.2f, 17f);
-        cameraRotation = 0;
         StartCoroutine(CinematicAnim());
     }
 
     IEnumerator CinematicAnim() {
-        Camera main = Camera.main;
-        Camera.main.enabled = false;
-        cinematicCamera.enabled = true;
-        while (!MoveCamera(0.25f, -0.15f)) {
-            yield return new WaitForEndOfFrame();
-        }
-        GameObject.FindGameObjectWithTag("IntroAnim").GetComponent<Animation>().Play();
+        GameObject.FindGameObjectWithTag("IntroAnim").GetComponent<Animator>().SetBool("Start", true);
         yield return new WaitForSeconds(DelayBetween);
-        yield return new WaitForSeconds(0.5f);
-        cinematicCamera.transform.localPosition = playerGO.transform.position + new Vector3(0, -3f, -3f);
-        cinematicCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        while (MoveCamera(-2f, 7f)) {
-            yield return new WaitForEndOfFrame();
-        }
-        yield return new WaitForSeconds(0.5f);
         SwitchScene(Scene.main);
     }
 
