@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 7cc194613deec1e4bbcd11b76cc3bee5
-timeCreated: 1440298652
-licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -160,7 +158,6 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-<<<<<<< HEAD
     clipAnimations:
     - serializedVersion: 16
       name: Take 001
@@ -320,13 +317,10 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-=======
-    clipAnimations: []
->>>>>>> f54a32ddaf81b29940e49a60d95584cd2bf3973f
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
