@@ -18,9 +18,9 @@ public class CraftTable : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
 
-        //ACTIVER LA TABLE AVEC LE MEME INDEXE QUE L'INVENTAIRE
+        //ACTIVER LA TABLE AVEC LE MEME INDEX QUE L'INVENTAIRE
 
-        if(other.tag == "craftingTable")
+        if(other.tag == "Player")
         {
             craftingUI.SetActive(true);
         }
