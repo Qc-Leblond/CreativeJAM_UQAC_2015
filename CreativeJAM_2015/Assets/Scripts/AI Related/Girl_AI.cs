@@ -19,6 +19,8 @@ public class Girl_AI : MonoBehaviour {
     AIState previousState;
     AIState currentState;
 
+    public State state;
+
     public bool isCrying = false;
     public bool isStuck = false;
     public bool isBaited = false;
@@ -55,6 +57,11 @@ public class Girl_AI : MonoBehaviour {
         fieldOfViewVisual.material.color = noDoubt;
     }
 
+    void Start() {
+        girlPathingAI.destination = currentPos.position;
+        transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0f, 360f), 0));
+    }
+
     void Update() {
         if (!isCrying) {
             currentState.Running();
@@ -74,6 +81,7 @@ public class Girl_AI : MonoBehaviour {
             else {
                 previousState = stateDictionary[State.idle];
             }
+            state = newState;
             currentState = stateDictionary[newState];
             currentState.Execute();
             
@@ -136,17 +144,23 @@ public class AIState {
 public class AIState_Moving : AIState {
     public AIState_Moving(Girl_AI ai) : base(ai) {  }
     AI_DestinationPoint destination;
+    float desiredRotation;
     Transform girlPos;
     public override void Execute() {
         destination = Girl_AI.possibleDestinations.GetRandomPoint(girlAI.currentPos);
         girlAI.currentPos = destination;
         girlAI.girlPathingAI.destination = destination.position;
+        desiredRotation = Random.Range(0f, 360f);
         if (girlPos == null) girlPos = girlAI.gameObject.transform;
     }
 
     public override void Running() {
-        if (girlPos.position == destination.position) {
-            girlAI.SwitchState(Girl_AI.State.idle);
+        if (!girlAI.girlPathingAI.hasPath || girlAI.girlPathingAI.velocity.sqrMagnitude == 0f) {
+            girlAI.transform.rotation = Quaternion.Slerp(girlAI.transform.rotation,
+                                                         Quaternion.Euler(new Vector3(0, desiredRotation, 0)),
+                                                         Time.deltaTime * girlAI.lookatRotationSpeed);
+            if (girlAI.transform.rotation.y == desiredRotation)
+                girlAI.SwitchState(Girl_AI.State.idle);
         }
     }
 }
@@ -162,8 +176,8 @@ public class AIState_Idle : AIState {
     }
     public override void Running() {
         timeBeforeMove -= Time.deltaTime;
-        if (timeBeforeMove < 0) {
-            girlAI.SwitchState(Girl_AI.State.moving);
+        if (timeBeforeMove <= 0) {
+                girlAI.SwitchState(Girl_AI.State.moving);
         }
     }
 }
