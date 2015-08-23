@@ -99,6 +99,7 @@ public class Controller : MonoBehaviour
         //Sélection des objets par les triggers
         if (Input.GetAxisRaw("SelectTrigger") == -1 && objectSelected < NbrObjet && !isAxisInUse)
         {
+            HideItems();
             isAxisInUse = true;
             objectSelected++;
             inventory.changeInventoryIndex(1);
@@ -106,6 +107,7 @@ public class Controller : MonoBehaviour
 
         if (Input.GetAxisRaw("SelectTrigger") == 1 && objectSelected > 0 && !isAxisInUse)
         {
+            HideItems();
             isAxisInUse = true;
             objectSelected--;
             inventory.changeInventoryIndex(-1);
@@ -117,6 +119,7 @@ public class Controller : MonoBehaviour
         //Sélection des objects par Q et E
         if (Input.GetKeyDown(KeyCode.Q) && objectSelected > 0)
         {
+            HideItems();
             objectSelected--;
             inventory.changeInventoryIndex(-1);
         }
@@ -124,6 +127,7 @@ public class Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && objectSelected < NbrObjet)
         {
+            HideItems();
             objectSelected++;
             inventory.changeInventoryIndex(1);
         }
@@ -203,5 +207,13 @@ public class Controller : MonoBehaviour
         rigidBody.isKinematic = true;
         rigidBody.velocity = Vector3.zero;
         rigidBody.isKinematic = false;
+    }
+
+    void HideItems()
+    {
+        ghostTrap.SetActive(false);
+        ghostBombe.SetActive(false);
+        //ghostPerruque.SetActive(false);
+        ghostStereo.SetActive(false);
     }
 }
